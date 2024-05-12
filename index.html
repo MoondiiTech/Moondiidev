@@ -3,7 +3,103 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <script src="https://cdn.tailwindcss.com"></script>
     <title>Moondiidev</title>
+    <style>
+      .menu-bg {
+        background-color: rgba(
+          30,
+          41,
+          59,
+          0.95
+        ); /* Dark background with some transparency */
+      }
+      .menu-button {
+        position: relative;
+        border: none;
+        color: white;
+        padding: 8px 20px;
+        font-size: 4.25rem; /* Adjusting the font size */
+        font-weight: bold;
+        text-align: left;
+        transition: transform 0.3s ease, color 0.3s ease;
+        transform: perspective(500px) rotateY(40deg);
+        margin-bottom: -10px; /* Negative margin to pack buttons closely */
+        border-radius: 8px; /* Adds rounded corners */
+        background: transparent; /* No background on the button text */
+        overflow: hidden; /* Ensures no overflow from the pseudo-element */
+      }
+      .menu-button::before {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        clip-path: polygon(2% 15%, 100% 61%, 100% 63%, 7% 84%);
+        transition: background-color 0.3s ease;
+        z-index: -1;
+      }
+      .menu-button:hover::before,
+      .menu-button:focus::before {
+        background: rgba(237, 237, 237, 0.9); /* Lighter background on hover */
+      }
+      .menu-button:hover,
+      .menu-button:focus {
+        color: #0e5f44; /* Changed to a darker shade of green */
+        transform: perspective(500px) rotateY(0deg);
+        outline: none;
+      }
+      .rotate-up {
+        transform: perspective(500px) rotateX(10deg) rotateY(40deg);
+      }
+      .rotate-down {
+        transform: perspective(500px) rotateX(-10deg) rotateY(40deg);
+      }
+
+      /* Mobile specific styles */
+      @media (max-width: 768px) {
+        .menu-button {
+          font-size: 2.5rem; /* Smaller font size for mobile */
+          padding: 12px 20px; /* Adjust padding for better touch targets */
+          background: rgba(
+            19,
+            19,
+            19,
+            0.8
+          ); /* Adding a visible background for better readability */
+        }
+        .menu-button::before {
+          clip-path: none; /* Removing the clip-path */
+        }
+      }
+    </style>
   </head>
-  <body></body>
+  <body class="font-sans antialiased text-white">
+    <!-- Hero section -->
+    <section class="text-gray-600 body-font">
+      <div
+        class="bg-image bg-cover bg-center h-screen flex items-center justify-center"
+        style="background-image: url('hero.webp')"
+      >
+        <!-- Vertical Menu -->
+        <div class="absolute top-0 left-0 h-full p-10">
+          <div class="flex flex-col items-start justify-between h-full">
+            <div>
+              <ul class="md:-space-y-14">
+                <li><button class="menu-button">Skills</button></li>
+                <li><button class="menu-button">Websites</button></li>
+                <li><button class="menu-button rotate-up">Games</button></li>
+                <li><button class="menu-button rotate-up">Others</button></li>
+                <li><button class="menu-button">Resume</button></li>
+                <li>
+                  <button class="menu-button rotate-down">Socials</button>
+                </li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </body>
 </html>
