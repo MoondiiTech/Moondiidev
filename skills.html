@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <script src="https://cdn.tailwindcss.com"></script>
+    <title>Moondiidev</title>
+  </head>
+  <body class="font-sans antialiased text-white" data-barba="wrapper">
+    <ul
+      class="transition flex absolute inset-0 m-0 z-10 pointer-events-none h-screen w-full"
+    >
+      <li class="transform scale-y-0 bg-white w-1/5"></li>
+      <li class="transform scale-y-0 bg-white w-1/5"></li>
+      <li class="transform scale-y-0 bg-white w-1/5"></li>
+      <li class="transform scale-y-0 bg-white w-1/5"></li>
+      <li class="transform scale-y-0 bg-white w-1/5"></li>
+    </ul>
+
+    <main
+      data-barba="container"
+      data-barba-namespace="home"
+      class="bg-blue-500"
+    >
+      <h1>Hoyaa</h1>
+      <a href="index.html" class="menu-button">Home</a>
+    </main>
+  </body>
+  <!-- Barba Core -->
+  <script src="https://unpkg.com/@barba/core"></script>
+
+  <!-- GSAP for animation -->
+  <script
+    type="text/javascript"
+    src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.2.4/gsap.min.js"
+  ></script>
+
+  <script src="app.js"></script>
+</html>

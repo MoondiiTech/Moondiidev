@@ -78,31 +78,55 @@
       }
     </style>
   </head>
-  <body class="font-sans antialiased text-white">
-    <!-- Hero section -->
-    <section class="text-gray-600 body-font">
-      <div
-        class="bg-image bg-cover bg-center h-screen flex items-center justify-center"
-        style="background-image: url('hero.webp')"
-      >
-        <!-- Vertical Menu -->
-        <div class="absolute md:top-20 md:left-14 top-0 left-0 h-full p-10">
-          <div class="flex flex-col items-start justify-between h-full">
-            <div>
-              <ul class="md:-space-y-14">
-                <li><button class="menu-button">Skills</button></li>
-                <li><button class="menu-button">Websites</button></li>
-                <li><button class="menu-button rotate-up">Games</button></li>
-                <li><button class="menu-button rotate-up">Others</button></li>
-                <li><button class="menu-button">Resume</button></li>
-                <li>
-                  <button class="menu-button rotate-down">Socials</button>
-                </li>
-              </ul>
+  <body class="font-sans antialiased text-white" data-barba="wrapper">
+    <!-- Transition -->
+    <!-- Hero Section -->
+    <ul
+      class="transition flex absolute inset-0 m-0 z-10 pointer-events-none h-screen w-full"
+    >
+      <li class="transform scale-y-0 bg-white w-1/5"></li>
+      <li class="transform scale-y-0 bg-white w-1/5"></li>
+      <li class="transform scale-y-0 bg-white w-1/5"></li>
+      <li class="transform scale-y-0 bg-white w-1/5"></li>
+      <li class="transform scale-y-0 bg-white w-1/5"></li>
+    </ul>
+
+    <main data-barba="container" data-barba-namespace="home">
+      <section class="text-gray-600 body-font">
+        <div
+          class="bg-image bg-cover bg-center h-screen flex items-center justify-center"
+          style="background-image: url('hero.webp')"
+        >
+          <!-- Vertical Menu -->
+          <div class="absolute md:top-20 md:left-14 top-0 left-0 h-full p-10">
+            <div class="flex flex-col items-start justify-between h-full">
+              <div>
+                <ul class="md:-space-y-14">
+                  <li>
+                    <a href="skills.html" class="menu-button">
+                      <button>Skills</button>
+                    </a>
+                  </li>
+                  <li><button class="menu-button">Websites</button></li>
+                  <li><button class="menu-button rotate-up">Games</button></li>
+                  <li><button class="menu-button rotate-up">Others</button></li>
+                  <li><button class="menu-button">Resume</button></li>
+                  <li>
+                    <button class="menu-button rotate-down">Socials</button>
+                  </li>
+                </ul>
+              </div>
             </div>
           </div>
         </div>
-      </div>
-    </section>
+      </section>
+    </main>
   </body>
+  <!-- Barba Core -->
+  <script src="https://unpkg.com/@barba/core"></script>
+
+  <!-- GSAP for animation -->
+  <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/gsap.min.js"></script>
+
+  <script src="app.js"></script>
 </html>
