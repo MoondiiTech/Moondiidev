@@ -1,0 +1,90 @@
+html,
+body {
+  height: 100%;
+  margin: 0;
+  padding: 0;
+  overflow: hidden; /* Prevent scrolling */
+}
+
+body {
+  position: relative; /* Position relative to allow absolute positioning of children */
+}
+.menu-button {
+  position: relative;
+  border: none;
+  color: white;
+  padding: 8px 20px;
+  font-size: 4.25rem; /* Adjusting the font size */
+  font-weight: bold;
+  text-align: left;
+  transition: transform 0.3s ease, color 0.3s ease;
+  transform: perspective(500px) rotateY(40deg);
+  margin-bottom: -10px; /* Negative margin to pack buttons closely */
+  border-radius: 8px; /* Adds rounded corners */
+  background: transparent; /* No background on the button text */
+  overflow: hidden; /* Ensures no overflow from the pseudo-element */
+}
+.menu-button::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  clip-path: polygon(2% 15%, 100% 61%, 100% 63%, 7% 84%);
+  transition: background-color 0.3s ease;
+  z-index: -1;
+}
+.menu-button:hover::before,
+.menu-button:focus::before {
+  background: rgba(237, 237, 237, 0.9); /* Lighter background on hover */
+}
+.menu-button:hover,
+.menu-button:focus {
+  color: #0e5f44; /* Changed to a darker shade of green */
+  transform: perspective(500px) rotateY(0deg);
+  outline: none;
+}
+.rotate-up {
+  transform: perspective(500px) rotateX(10deg) rotateY(40deg);
+}
+.rotate-down {
+  transform: perspective(500px) rotateX(-10deg) rotateY(40deg);
+}
+
+/* Mobile specific styles */
+@media (max-width: 768px) {
+  .menu-button {
+    font-size: 2.5rem; /* Smaller font size for mobile */
+    padding: 12px 20px; /* Adjust padding for better touch targets */
+    background: rgba(
+      19,
+      19,
+      19,
+      0.8
+    ); /* Adding a visible background for better readability */
+  }
+  .menu-button::before {
+    clip-path: none; /* Removing the clip-path */
+  }
+}
+
+.custom-green-100 {
+  background-color: rgb(10, 75, 55);
+}
+.custom-green-200 {
+  background-color: rgb(10, 80, 56);
+}
+
+.custom-green-300 {
+  background-color: rgb(10, 85, 57);
+}
+.custom-green-400 {
+  background-color: rgb(10, 90, 58);
+}
+.custom-green-500 {
+  background-color: rgb(10, 95, 59);
+}
+.custom-green-600 {
+  background-color: rgb(10, 100, 60);
+}

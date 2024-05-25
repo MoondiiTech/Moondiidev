@@ -1,52 +1,50 @@
-function delay(n) {
-  n = n || 2000;
-  return new Promise((done) => {
-    setTimeout(() => {
-      done();
-    }, n);
-  });
-}
-
-function pageTransition() {
-  console.log("Starting page transition...");
-  var tl = gsap.timeline({
-    onStart: () => console.log("Timeline started"),
-    onComplete: () => console.log("Timeline completed"),
-  });
-
-  tl.to("ul li", {
+function pageTransitionIn() {
+  var tl = gsap.timeline();
+  tl.to("ul.transition li", {
     duration: 0.5,
     scaleY: 1,
-    transformOrigin: "bottom left",
     stagger: 0.2,
+    transformOrigin: "bottom left",
     onStart: () => console.log("Animating in"),
     onComplete: () => console.log("Animation in complete"),
-  }).to("ul li", {
+  });
+  return tl;
+}
+
+function pageTransitionOut() {
+  var tl = gsap.timeline();
+  tl.to("ul.transition li", {
     duration: 0.5,
     scaleY: 0,
-    transformOrigin: "bottom left",
     stagger: 0.1,
     delay: 0.1,
+    transformOrigin: "bottom left",
     onStart: () => console.log("Animating out"),
     onComplete: () => console.log("Animation out complete"),
   });
+  return tl;
+}
+
+function contentAnimation() {
+  gsap.from(".menu", { duration: 1, y: 30, opacity: 0, ease: "power2.inOut" });
 }
 
 barba.init({
-  sync: true,
   transitions: [
     {
-      async leave(data) {
+      name: "default-transition",
+      once(data) {
+        contentAnimation();
+      },
+      leave(data) {
         const done = this.async();
-        pageTransition();
-        await delay(1000);
-        done();
+        pageTransitionIn().eventCallback("onComplete", done);
       },
-      async enter(data) {
+      enter(data) {
         contentAnimation();
       },
-      async once(data) {
-        contentAnimation();
+      afterEnter(data) {
+        pageTransitionOut();
       },
     },
   ],
