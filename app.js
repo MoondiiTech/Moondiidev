@@ -23,9 +23,9 @@ function pageTransitionType1() {
       },
     })
     .to("ul.transition--1 li", {
-      duration: 0.5,
+      duration: 0.3,
       scaleY: 1,
-      stagger: 0.15,
+      stagger: 0.1,
       transformOrigin: "bottom left",
     });
 }
@@ -40,9 +40,9 @@ function pageTransitionTypeOut1() {
       },
     })
     .to("ul.transition--1 li", {
-      duration: 0.5,
+      duration: 0.3,
       scaleY: 0, // Reverse of the 'in' animation
-      stagger: 0.1,
+      stagger: 0.08,
       delay: 0.1,
       transformOrigin: "bottom left",
     });
