@@ -8,10 +8,11 @@
     <title>Moondiidev</title>
   </head>
   <body class="font-sans antialiased text-white" data-barba="wrapper">
-    <!-- Transition -->
-    <!-- Hero Section -->
+    <div id="overlay" style="display: none"></div>
+
+    <!-- Transition 1 -->
     <ul
-      class="transition flex absolute inset-0 m-0 z-10 pointer-events-none h-screen w-full"
+      class="transition--1 flex absolute inset-0 m-0 z-10 pointer-events-none h-screen w-full"
     >
       <li class="transform scale-y-0 custom-green-100 w-1/6"></li>
       <li class="transform scale-y-0 custom-green-200 w-1/6"></li>
@@ -21,6 +22,14 @@
       <li class="transform scale-y-0 custom-green-600 w-1/6"></li>
     </ul>
 
+    <!-- Transition 2 -->
+    <ul
+      class="transition--2 flex absolute inset-0 m-0 z-10 pointer-events-none h-screen w-full"
+    >
+      <li class="transform scale-x-0 custom-green-100 w-full"></li>
+    </ul>
+
+    <!-- Main -->
     <main data-barba="container" data-barba-namespace="home">
       <section class="text-gray-600 body-font">
         <div
@@ -33,11 +42,23 @@
               <div>
                 <ul class="menu md:-space-y-14">
                   <li>
-                    <a href="skills.html" class="menu-button">
+                    <a
+                      href="skills.html"
+                      class="menu-button"
+                      data-transition-type="type1"
+                    >
                       <button>Skills</button>
                     </a>
                   </li>
-                  <li><button class="menu-button">Websites</button></li>
+                  <li>
+                    <a
+                      href="websites.html"
+                      class="menu-button"
+                      data-transition-type="type2"
+                    >
+                      <button>Websites</button>
+                    </a>
+                  </li>
                   <li><button class="menu-button rotate-up">Games</button></li>
                   <li><button class="menu-button rotate-up">Others</button></li>
                   <li><button class="menu-button">Resume</button></li>
