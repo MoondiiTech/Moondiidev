@@ -59,10 +59,10 @@ function pageTransitionType2() {
       },
     })
     .to("ul.transition--2 li", {
-      duration: 0.5,
+      duration: 0.7,
       scaleX: 1,
       transformOrigin: "bottom left",
-      ease: "slow(0.7, 0.7, false)", // Slow start, slow end
+      ease: "Power2.easeInOut", // Slow start, slow end
     });
 }
 
@@ -77,10 +77,10 @@ function pageTransitionTypeOut2() {
       },
     })
     .to("ul.transition--2 li", {
-      duration: 0.5,
+      duration: 0.7,
       scaleX: 0, // Reverse of the 'in' animation
       transformOrigin: "bottom right",
-      ease: "slow(0.7, 0.7, true)", // Slow start, slow end, reversed
+      ease: "Power2.easeInOut", // Slow start, slow end, reversed
     });
 }
 

@@ -7,6 +7,20 @@
     <title>Moondiidev</title>
   </head>
   <body class="font-sans antialiased text-white" data-barba="wrapper">
+    <div
+      id="overlay"
+      style="
+        display: none;
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        z-index: 9999;
+        background: rgba(0, 0, 0, 0);
+      "
+    ></div>
+
     <!-- Transition 1 -->
     <ul
       class="transition--1 flex absolute inset-0 m-0 z-10 pointer-events-none h-screen w-full"
@@ -25,7 +39,7 @@
       data-barba-namespace="skills"
       class="bg-blue-500"
     >
-      <a href="index.html" class="menu-button" data-transition-type="type1"
+      <a href="index.html" class="menu-button" data-transition-type="type2"
         >Home</a
       >
     </main>
