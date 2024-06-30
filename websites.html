@@ -138,7 +138,12 @@
           display: flex;
           flex-direction: column;
           align-items: center;
-          margin-right: 2rem !important; /* Add spacing between slides */
+        }
+
+        @media (min-width: 768px) {
+          .swiper-slide {
+            margin-right: 2rem !important; /* Add spacing between slides on medium and larger screens */
+          }
         }
       </style>
       <a href="index.html" id="home-button" data-transition-type="type2"
