@@ -122,10 +122,7 @@ function contentAnimationForWebsites() {
     ease: "power2.inOut",
   });
 }
-function prepareTransition(namespace) {
-  console.log(`Preparing transition to ${namespace}...`);
-  initializePage();
-}
+
 function initializePage() {
   console.log("Initializing page...");
   initSwiper();
@@ -155,15 +152,20 @@ function initVideoControls() {
   console.log("Initializing video controls...");
   const videos = document.querySelectorAll(".custom-video");
   console.log("Found videos:", videos);
+
   videos.forEach((video) => {
-    video
-      .play()
-      .then(() => {
-        console.log("Video playing:", video);
-      })
-      .catch((error) => {
-        console.error("Error playing video:", video, error);
-      });
+    const loader = video.parentElement.querySelector(".loader");
+
+    // Autoplay video when it's loaded
+    video.play();
+
+    video.addEventListener("loadeddata", () => {
+      if (loader) {
+        loader.style.display = "none";
+      }
+      video.style.display = "block";
+    });
+
     video.addEventListener("click", () => {
       if (video.requestFullscreen) {
         video.requestFullscreen();
@@ -177,28 +179,6 @@ function initVideoControls() {
       video.muted = false; // Unmute the video
       video.play();
     });
-    // Ensure video is correctly handled on iOS
-    video.addEventListener("loadeddata", () => {
-      video.play().catch((error) => {
-        console.error("Error playing video on load:", error);
-      });
-    });
-
-    // Manually trigger play for iOS
-    video
-      .play()
-      .then(() => {
-        console.log("Video playing:", video);
-      })
-      .catch((error) => {
-        console.error("Error playing video:", video, error);
-        // Retry play on user interaction
-        video.addEventListener("click", () => {
-          video.play().catch((err) => {
-            console.error("Retrying play error:", err);
-          });
-        });
-      });
   });
   console.log("Video controls initialized.");
 }
