@@ -156,14 +156,16 @@ function initVideoControls() {
   videos.forEach((video) => {
     const loader = video.parentElement.querySelector(".loader");
 
-    // Autoplay video when it's loaded
-    video.play();
+    // Remove autoplay attribute
+    video.removeAttribute("autoplay");
 
     video.addEventListener("loadeddata", () => {
       if (loader) {
         loader.style.display = "none";
       }
       video.style.display = "block";
+      // Autoplay video when it's loaded
+      video.play();
     });
 
     video.addEventListener("click", () => {
