@@ -72,7 +72,9 @@ body {
 }
 
 .menu-button:hover::before,
-.menu-button:focus::before {
+.menu-button:focus::before,
+.menu-button:active::before,
+.menu-button:active::after {
   background: rgba(237, 237, 237, 0.9); /* Lighter background on hover */
 }
 
