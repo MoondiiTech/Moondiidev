@@ -195,6 +195,14 @@ function initVideoControls() {
       }
     });
 
+    // Fallback to hide loader after a certain time
+    setTimeout(() => {
+      if (loader) {
+        loader.style.display = "none";
+      }
+      video.style.display = "block";
+    }, 5000); // 5 seconds timeout as a fallback
+
     // Event listener for click to go fullscreen
     video.addEventListener("click", () => {
       if (video.requestFullscreen) {
