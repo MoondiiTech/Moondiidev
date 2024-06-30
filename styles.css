@@ -114,7 +114,7 @@ body {
 }
 
 .screen-frame {
-  margin-bottom: 6rem; /* Increase space between videos */
+  margin-bottom: 4rem; /* Increase space between videos */
 }
 
 .screen-frame video {
@@ -130,41 +130,6 @@ body {
   display: block !important;
   opacity: 1;
   transition: opacity 0.3s;
-}
-
-/* Custom Swiper Navigation Buttons */
-.swiper-button-next,
-.swiper-button-prev {
-  background: linear-gradient(45deg, #0e5f44, #1abc9c);
-  border-radius: 50%;
-  width: 50px;
-  height: 50px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  color: white;
-  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
-  transition: background 0.3s ease, transform 0.3s ease;
-  z-index: 10; /* Ensure buttons are above the content */
-}
-
-.swiper-button-next:hover,
-.swiper-button-prev:hover {
-  background: linear-gradient(45deg, #1abc9c, #0e5f44);
-  transform: scale(1.1);
-}
-
-.swiper-button-next::after,
-.swiper-button-prev::after {
-  font-size: 20px;
-}
-
-.swiper-button-next {
-  right: 10px; /* Adjust as needed */
-}
-
-.swiper-button-prev {
-  left: 10px; /* Adjust as needed */
 }
 
 .video-title {
