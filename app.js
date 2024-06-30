@@ -136,6 +136,7 @@ function initSwiper() {
     slidesPerView: 1,
     spaceBetween: 20,
     loop: true,
+    initialSlide: 1, // Start from the second slide (index 1)
     pagination: {
       el: ".swiper-pagination",
       clickable: true,
