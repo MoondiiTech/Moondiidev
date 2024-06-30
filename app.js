@@ -169,6 +169,8 @@ function initVideoControls() {
     });
 
     video.addEventListener("click", () => {
+      video.pause(); // Ensure the video pauses before entering fullscreen
+
       if (video.requestFullscreen) {
         video.requestFullscreen();
       } else if (video.mozRequestFullScreen) {
@@ -178,8 +180,9 @@ function initVideoControls() {
       } else if (video.msRequestFullscreen) {
         video.msRequestFullscreen(); // IE/Edge
       }
+
       video.muted = false; // Unmute the video
-      video.play();
+      video.play(); // Play the video in fullscreen
     });
   });
   console.log("Video controls initialized.");
