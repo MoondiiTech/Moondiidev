@@ -101,12 +101,7 @@ const transitions = {
 // Content animation function for general page content
 function contentAnimation() {
   console.log("Animating content");
-  gsap.from(".menu", {
-    duration: 1,
-    y: 30,
-    opacity: 0,
-    ease: "power2.inOut",
-  });
+  gsap.from(".menu", { duration: 1, y: 30, opacity: 0, ease: "power2.inOut" });
 }
 
 function contentAnimationForSkills() {
@@ -129,12 +124,18 @@ function contentAnimationForWebsites() {
   });
 }
 
-// Function to initialize Swiper.js
+function initializePage() {
+  console.log("Initializing page...");
+  initSwiper();
+  initVideoControls();
+  console.log("Page initialized.");
+}
+
 function initSwiper() {
-  console.log("Initializing Swiper");
-  new Swiper(".swiper-container", {
+  console.log("Initializing Swiper...");
+  const swiper = new Swiper(".swiper-container", {
     slidesPerView: 1,
-    spaceBetween: 10,
+    spaceBetween: 20,
     loop: true,
     pagination: {
       el: ".swiper-pagination",
@@ -145,18 +146,45 @@ function initSwiper() {
       prevEl: ".swiper-button-prev",
     },
   });
+  console.log("Swiper initialized.");
 }
 
-// Function to re-enable interactions
-function enableInteractions() {
-  document.querySelector("body").style.pointerEvents = "auto";
+function initVideoControls() {
+  console.log("Initializing video controls...");
+  const videos = document.querySelectorAll(".custom-video");
+  console.log("Found videos:", videos);
+  videos.forEach((video) => {
+    video.addEventListener("mouseenter", () => {
+      video.controls = true;
+      console.log("Showing controls for video", video);
+    });
+    video.addEventListener("mouseleave", () => {
+      video.controls = false;
+      console.log("Hiding controls for video", video);
+    });
+    video
+      .play()
+      .then(() => {
+        console.log("Video playing:", video);
+      })
+      .catch((error) => {
+        console.error("Error playing video:", video, error);
+      });
+  });
+  console.log("Video controls initialized.");
 }
 
+// Ensure page initialization after Barba.js transitions
+barba.hooks.afterEnter((data) => {
+  console.log("Barba.js afterEnter hook called. Reinitializing page...");
+  initializePage();
+});
+
+// Barba.js initialization
 barba.init({
-  cache: false, // Disable Barba.js cache
   transitions: [
     {
-      name: "flexible-transition",
+      name: "default-transition",
       leave(data) {
         const done = this.async();
         currentTransitionType = data.trigger.dataset.transitionType || "type1";
@@ -177,22 +205,6 @@ barba.init({
             contentAnimation();
             break;
         }
-        enableInteractions();
-      },
-      once(data) {
-        console.log("Initial load namespace:", data.next.namespace);
-        switch (data.next.namespace) {
-          case "skills":
-            contentAnimationForSkills();
-            break;
-          case "websites":
-            contentAnimationForWebsites();
-            break;
-          default:
-            contentAnimation();
-            break;
-        }
-        enableInteractions();
       },
       afterEnter(data) {
         console.log("After enter transition type:", currentTransitionType);
@@ -200,15 +212,13 @@ barba.init({
           currentTransitionType === "type1"
             ? pageTransitionTypeOut1()
             : pageTransitionTypeOut2();
-        timelineOut.eventCallback("onComplete", () => {
-          if (data.next.namespace === "websites") {
-            initSwiper(); // Reinitialize Swiper after transition out completes
-          }
-          hideOverlay(); // Ensure overlay is hidden after enter transition
-        });
         timelineOut.play();
-        enableInteractions();
       },
     },
   ],
+});
+
+document.addEventListener("DOMContentLoaded", () => {
+  console.log("DOM fully loaded and parsed.");
+  initializePage();
 });
