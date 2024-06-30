@@ -136,6 +136,7 @@ function initSwiper() {
     slidesPerView: 1,
     spaceBetween: 20,
     loop: true,
+    initialSlide: 1, // Start from the second slide (index 1)
     pagination: {
       el: ".swiper-pagination",
       clickable: true,
@@ -144,11 +145,9 @@ function initSwiper() {
       nextEl: ".swiper-button-next",
       prevEl: ".swiper-button-prev",
     },
-    initialSlide: 1, // Start from the second slide
   });
   console.log("Swiper initialized.");
 }
-
 function initVideoControls() {
   console.log("Initializing video controls...");
   const videos = document.querySelectorAll(".custom-video");
@@ -157,32 +156,38 @@ function initVideoControls() {
   const isIOS = /iPad|iPhone|iPod/.test(navigator.userAgent);
 
   videos.forEach((video) => {
-    // Set poster attribute for preview
-    if (video.dataset.poster) {
-      video.setAttribute("poster", video.dataset.poster);
+    // Autoplay handling for iOS devices
+    if (isIOS) {
+      video.autoplay = true;
+      video.muted = true;
+    } else {
+      video.play();
+      video.removeAttribute("autoplay");
     }
 
-    // Show video initially
-    video.style.display = "block";
-
-    // Handle video canplaythrough event for better reliability on iOS
-    video.addEventListener("canplaythrough", () => {
-      video.style.display = "block";
-      video.play().catch(() => {
-        console.log("Autoplay failed");
-      });
+    // Handle video loaded metadata event
+    video.addEventListener("loadedmetadata", () => {
+      if (video.readyState > 2) {
+        // readyState 3 means the video is ready to play
+        video.style.display = "block";
+        if (!isIOS) {
+          video.play().catch(() => {});
+        }
+      }
     });
 
-    // For iOS specifically
-    if (isIOS) {
-      video.play().catch(() => {
-        console.log("Autoplay failed on iOS");
-      });
-    } else {
-      video.play().catch(() => {
-        console.log("Autoplay failed");
-      });
-    }
+    // Handle video can play event
+    video.addEventListener("canplay", () => {
+      video.style.display = "block";
+      if (!isIOS) {
+        video.play().catch(() => {});
+      }
+    });
+
+    // Fallback to hide loader after a certain time
+    setTimeout(() => {
+      video.style.display = "block";
+    }, 5000); // 5 seconds timeout as a fallback
 
     // Event listener for click to go fullscreen
     video.addEventListener("click", () => {
@@ -196,9 +201,7 @@ function initVideoControls() {
         video.msRequestFullscreen(); // IE/Edge
       }
       video.muted = false; // Unmute the video
-      video.play().catch(() => {
-        console.log("Play on click failed");
-      });
+      video.play();
     });
   });
 
