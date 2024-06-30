@@ -136,7 +136,6 @@ function initSwiper() {
     slidesPerView: 1,
     spaceBetween: 20,
     loop: true,
-    initialSlide: 1, // Start from the second slide (index 1)
     pagination: {
       el: ".swiper-pagination",
       clickable: true,
@@ -145,26 +144,21 @@ function initSwiper() {
       nextEl: ".swiper-button-next",
       prevEl: ".swiper-button-prev",
     },
+    initialSlide: 1, // Start from the second slide
   });
   console.log("Swiper initialized.");
 }
+
 function initVideoControls() {
   console.log("Initializing video controls...");
   const videos = document.querySelectorAll(".custom-video");
   console.log("Found videos:", videos);
 
-  const isIOS = /iPad|iPhone|iPod/.test(navigator.userAgent);
-
   videos.forEach((video) => {
+    video.play();
     // Set poster attribute for preview
     if (video.dataset.poster) {
       video.setAttribute("poster", video.dataset.poster);
-    }
-
-    // Remove autoplay attribute for iOS
-    if (isIOS) {
-      video.removeAttribute("autoplay");
-      video.muted = true;
     }
 
     // Show video initially
