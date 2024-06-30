@@ -178,3 +178,12 @@ body {
   margin-top: 0.5rem;
   text-align: center;
 }
+
+.swiper-pagination-bullet {
+  background: white !important; /* Make the pagination bullets white */
+  opacity: 1; /* Ensure bullets are fully visible */
+}
+
+.swiper-pagination-bullet-active {
+  background: #0e5f44 !important; /* Change the color of the active bullet */
+}
