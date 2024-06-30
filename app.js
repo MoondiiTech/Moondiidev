@@ -160,17 +160,14 @@ function initVideoControls() {
     // Remove autoplay attribute
     video.removeAttribute("autoplay");
 
-    const hideLoader = () => {
+    video.addEventListener("loadeddata", () => {
       if (loader) {
         loader.style.display = "none";
       }
       video.style.display = "block";
       // Autoplay video when it's loaded
       video.play();
-    };
-
-    video.addEventListener("loadeddata", hideLoader);
-    video.addEventListener("canplaythrough", hideLoader);
+    });
 
     video.addEventListener("click", () => {
       if (video.requestFullscreen) {
