@@ -154,8 +154,9 @@ function initVideoControls() {
   const videos = document.querySelectorAll(".custom-video");
   console.log("Found videos:", videos);
 
+  const isIOS = /iPad|iPhone|iPod/.test(navigator.userAgent);
+
   videos.forEach((video) => {
-    video.play();
     // Set poster attribute for preview
     if (video.dataset.poster) {
       video.setAttribute("poster", video.dataset.poster);
@@ -168,9 +169,22 @@ function initVideoControls() {
     video.addEventListener("canplaythrough", () => {
       video.style.display = "block";
       if (!isIOS) {
-        video.play().catch(() => {});
+        video.play().catch(() => {
+          console.log("Autoplay failed");
+        });
       }
     });
+
+    // Attempt to play video on iOS (requires user interaction)
+    if (isIOS) {
+      video.play().catch(() => {
+        console.log("Autoplay failed on iOS");
+      });
+    } else {
+      video.play().catch(() => {
+        console.log("Autoplay failed");
+      });
+    }
 
     // Event listener for click to go fullscreen
     video.addEventListener("click", () => {
