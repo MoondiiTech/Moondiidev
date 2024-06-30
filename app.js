@@ -156,12 +156,13 @@ function initVideoControls() {
   const isIOS = /iPad|iPhone|iPod/.test(navigator.userAgent);
 
   videos.forEach((video) => {
+    video.play();
+
     // Autoplay handling for iOS devices
     if (isIOS) {
       video.autoplay = true;
       video.muted = true;
     } else {
-      video.play();
       video.removeAttribute("autoplay");
     }
 
