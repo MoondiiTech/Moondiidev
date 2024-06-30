@@ -9,6 +9,7 @@ body {
 body {
   position: relative; /* Position relative to allow absolute positioning of children */
 }
+
 .menu-button {
   position: relative;
   border: none;
@@ -24,6 +25,7 @@ body {
   background: transparent; /* No background on the button text */
   overflow: hidden; /* Ensures no overflow from the pseudo-element */
 }
+
 .menu-button::before {
   content: "";
   position: absolute;
@@ -35,19 +37,23 @@ body {
   transition: background-color 0.3s ease;
   z-index: -1;
 }
+
 .menu-button:hover::before,
 .menu-button:focus::before {
   background: rgba(237, 237, 237, 0.9); /* Lighter background on hover */
 }
+
 .menu-button:hover,
 .menu-button:focus {
   color: #0e5f44; /* Changed to a darker shade of green */
   transform: perspective(500px) rotateY(0deg);
   outline: none;
 }
+
 .rotate-up {
   transform: perspective(500px) rotateX(10deg) rotateY(40deg);
 }
+
 .rotate-down {
   transform: perspective(500px) rotateX(-10deg) rotateY(40deg);
 }
@@ -72,6 +78,7 @@ body {
 .custom-green-100 {
   background-color: rgb(10, 75, 55);
 }
+
 .custom-green-200 {
   background-color: rgb(10, 80, 56);
 }
@@ -79,12 +86,15 @@ body {
 .custom-green-300 {
   background-color: rgb(10, 85, 57);
 }
+
 .custom-green-400 {
   background-color: rgb(10, 90, 58);
 }
+
 .custom-green-500 {
   background-color: rgb(10, 95, 59);
 }
+
 .custom-green-600 {
   background-color: rgb(10, 100, 60);
 }
@@ -104,19 +114,67 @@ body {
 }
 
 .screen-frame {
-  position: relative;
-  width: 80%;
-  padding-top: 45%; /* 16:9 Aspect Ratio */
-  background: #000;
-  border: 4px solid #333;
-  border-radius: 12px;
-  box-shadow: 0 0 20px rgba(0, 0, 0, 0.5);
-  margin: 0 auto;
+  margin-bottom: 6rem; /* Increase space between videos */
 }
+
 .screen-frame video {
-  position: absolute;
-  top: 0;
-  left: 0;
   width: 100%;
   height: 100%;
+  display: block;
+  cursor: pointer; /* Change cursor to hand */
+}
+
+.screen-frame video:hover::-webkit-media-controls,
+.screen-frame video:hover::cue,
+.screen-frame video:hover::cue-list {
+  display: block !important;
+  opacity: 1;
+  transition: opacity 0.3s;
+}
+
+/* Custom Swiper Navigation Buttons */
+.swiper-button-next,
+.swiper-button-prev {
+  background: linear-gradient(45deg, #0e5f44, #1abc9c);
+  border-radius: 50%;
+  width: 50px;
+  height: 50px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: white;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+  transition: background 0.3s ease, transform 0.3s ease;
+  z-index: 10; /* Ensure buttons are above the content */
+}
+
+.swiper-button-next:hover,
+.swiper-button-prev:hover {
+  background: linear-gradient(45deg, #1abc9c, #0e5f44);
+  transform: scale(1.1);
+}
+
+.swiper-button-next::after,
+.swiper-button-prev::after {
+  font-size: 20px;
+}
+
+.swiper-button-next {
+  right: 10px; /* Adjust as needed */
+}
+
+.swiper-button-prev {
+  left: 10px; /* Adjust as needed */
+}
+
+.video-title {
+  font-size: 2rem;
+  margin-top: 1rem;
+  text-align: center;
+}
+
+.video-description {
+  font-size: 1.2rem;
+  margin-top: 0.5rem;
+  text-align: center;
 }

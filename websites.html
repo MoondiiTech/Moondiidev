@@ -47,6 +47,76 @@
 
     <!-- Main -->
     <main data-barba="container" data-barba-namespace="websites">
+      <style>
+        /* Custom Swiper Navigation Buttons */
+        .swiper-button-next,
+        .swiper-button-prev {
+          background: linear-gradient(45deg, #0e5f44, #1abc9c);
+          border-radius: 50%;
+          width: 50px;
+          height: 50px;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          color: white;
+          box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+          transition: background 0.3s ease, transform 0.3s ease;
+          z-index: 10; /* Ensure buttons are above the content */
+        }
+
+        .swiper-button-next:hover,
+        .swiper-button-prev:hover {
+          background: linear-gradient(45deg, #1abc9c, #0e5f44);
+          transform: scale(1.1);
+        }
+
+        .swiper-button-next::after,
+        .swiper-button-prev::after {
+          font-size: 20px;
+        }
+
+        .swiper-button-next {
+          right: 10px; /* Adjust as needed */
+        }
+
+        .swiper-button-prev {
+          left: 10px; /* Adjust as needed */
+        }
+
+        .swiper-slide {
+          display: flex;
+          flex-direction: column;
+          align-items: center;
+          margin-right: 2rem !important; /* Add spacing between slides */
+        }
+
+        .screen-frame {
+          margin-bottom: 8rem; /* Increase space between videos */
+        }
+
+        .screen-frame video {
+          width: 100%;
+          height: 100%;
+          display: block;
+          cursor: pointer; /* Change cursor to hand */
+        }
+
+        .video-title {
+          font-size: 2rem;
+          margin-top: 1rem;
+          text-align: center;
+        }
+
+        .video-description {
+          font-size: 1.2rem;
+          margin-top: 0.5rem;
+          text-align: center;
+        }
+      </style>
+
+      <a href="index.html" class="menu-button" data-transition-type="type2"
+        >HOME</a
+      >
       <div
         class="w-full h-full bg-dark flex flex-col items-center justify-center"
       >
@@ -56,24 +126,36 @@
             <!-- Slides -->
             <div class="swiper-slide flex flex-col items-center">
               <div class="screen-frame">
-                <video controls>
+                <video class="custom-video" autoplay loop muted>
                   <source src="example-video1.mp4" type="video/mp4" />
                   Your browser does not support the video tag.
                 </video>
+                <div class="video-title">Project Title 1</div>
+                <div class="video-description">Description for Project 1</div>
               </div>
             </div>
             <div class="swiper-slide flex flex-col items-center">
               <div class="screen-frame">
-                <video controls>
+                <video class="custom-video" autoplay loop muted>
                   <source src="example-video2.mp4" type="video/mp4" />
                   Your browser does not support the video tag.
                 </video>
+                <div class="video-title">Project Title 2</div>
+                <div class="video-description">Description for Project 2</div>
               </div>
-              <div class="screen-base"></div>
+            </div>
+            <div class="swiper-slide flex flex-col items-center">
+              <div class="screen-frame">
+                <video class="custom-video" autoplay loop muted>
+                  <source src="example-video3.mp4" type="video/mp4" />
+                  Your browser does not support the video tag.
+                </video>
+                <div class="video-title">Project Title 3</div>
+                <div class="video-description">Description for Project 3</div>
+              </div>
             </div>
             <!-- Add more slides as needed -->
           </div>
-          <h1 class="text-2xl mt-8">Project Name</h1>
           <!-- Add Pagination -->
           <div class="swiper-pagination"></div>
           <!-- Add Navigation -->
@@ -81,10 +163,6 @@
           <div class="swiper-button-prev"></div>
         </div>
       </div>
-
-      <a href="index.html" class="menu-button" data-transition-type="type2"
-        >HOME</a
-      >
     </main>
 
     <!-- Barba.js -->
@@ -95,5 +173,90 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.9.1/gsap.min.js"></script>
     <!-- App.js for custom animations and transitions -->
     <script src="app.js"></script>
+    <script>
+      function initSwiper() {
+        console.log("Initializing Swiper...");
+        const swiper = new Swiper(".swiper-container", {
+          slidesPerView: 1,
+          spaceBetween: 20,
+          loop: true,
+          pagination: {
+            el: ".swiper-pagination",
+            clickable: true,
+          },
+          navigation: {
+            nextEl: ".swiper-button-next",
+            prevEl: ".swiper-button-prev",
+          },
+        });
+        console.log("Swiper initialized.");
+      }
+
+      function initVideoControls() {
+        console.log("Initializing video controls...");
+        const videos = document.querySelectorAll(".custom-video");
+        console.log("Found videos:", videos);
+        videos.forEach((video) => {
+          video.addEventListener("mouseenter", () => {
+            video.controls = true;
+            console.log("Showing controls for video", video);
+          });
+          video.addEventListener("mouseleave", () => {
+            video.controls = false;
+            console.log("Hiding controls for video", video);
+          });
+          video
+            .play()
+            .then(() => {
+              console.log("Video playing:", video);
+            })
+            .catch((error) => {
+              console.error("Error playing video:", video, error);
+            });
+        });
+        console.log("Video controls initialized.");
+      }
+
+      function initializePage() {
+        console.log("Initializing page...");
+        initSwiper();
+        initVideoControls();
+        console.log("Page initialized.");
+      }
+
+      document.addEventListener("DOMContentLoaded", () => {
+        console.log("DOM fully loaded and parsed.");
+        initializePage();
+      });
+
+      // Ensure page initialization after Barba.js transitions
+      barba.hooks.afterEnter((data) => {
+        console.log("Barba.js afterEnter hook called. Reinitializing page...");
+        initializePage();
+      });
+
+      // Barba.js initialization
+      barba.init({
+        transitions: [
+          {
+            name: "default-transition",
+            leave(data) {
+              console.log("Leaving current page...");
+              return gsap.to(data.current.container, {
+                opacity: 0,
+                duration: 0.5,
+              });
+            },
+            enter(data) {
+              console.log("Entering new page...");
+              return gsap.from(data.next.container, {
+                opacity: 0,
+                duration: 0.5,
+              });
+            },
+          },
+        ],
+      });
+    </script>
   </body>
 </html>
