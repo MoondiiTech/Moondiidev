@@ -2,27 +2,29 @@
 let currentTransitionType = "type1";
 
 function showOverlay() {
-  // Show the overlay
+  console.log("Showing overlay");
   document.getElementById("overlay").style.display = "block";
 }
 
 function hideOverlay() {
-  // Hide the overlay
+  console.log("Hiding overlay");
   document.getElementById("overlay").style.display = "none";
 }
 
 // Define transition functions for each type
-// Page transition type 1
 function pageTransitionType1() {
+  console.log("Starting pageTransitionType1");
   showOverlay();
-
+  const elements = document.querySelectorAll("ul.transition--1 li");
+  console.log("Elements to animate:", elements);
   return gsap
     .timeline({
       onComplete: () => {
+        console.log("Completed pageTransitionType1");
         hideOverlay();
       },
     })
-    .to("ul.transition--1 li", {
+    .to(elements, {
       duration: 0.3,
       scaleY: 1,
       stagger: 0.1,
@@ -31,60 +33,66 @@ function pageTransitionType1() {
 }
 
 function pageTransitionTypeOut1() {
+  console.log("Starting pageTransitionTypeOut1");
   showOverlay();
-
+  const elements = document.querySelectorAll("ul.transition--1 li");
+  console.log("Elements to animate:", elements);
   return gsap
     .timeline({
       onComplete: () => {
+        console.log("Completed pageTransitionTypeOut1");
         hideOverlay();
       },
     })
-    .to("ul.transition--1 li", {
+    .to(elements, {
       duration: 0.3,
-      scaleY: 0, // Reverse of the 'in' animation
+      scaleY: 0,
       stagger: 0.08,
       delay: 0.1,
       transformOrigin: "bottom left",
     });
 }
 
-// Page transition type 2 - Enter Animation
 function pageTransitionType2() {
+  console.log("Starting pageTransitionType2");
   showOverlay();
-
+  const elements = document.querySelectorAll("ul.transition--2 li");
+  console.log("Elements to animate:", elements);
   return gsap
     .timeline({
       onComplete: () => {
+        console.log("Completed pageTransitionType2");
         hideOverlay();
       },
     })
-    .to("ul.transition--2 li", {
+    .to(elements, {
       duration: 0.7,
       scaleX: 1,
       transformOrigin: "bottom left",
-      ease: "Power2.easeInOut", // Slow start, slow end
+      ease: "Power2.easeInOut",
     });
 }
 
-// Page transition type 2 - Exit Animation
 function pageTransitionTypeOut2() {
+  console.log("Starting pageTransitionTypeOut2");
   showOverlay();
-
+  const elements = document.querySelectorAll("ul.transition--2 li");
+  console.log("Elements to animate:", elements);
   return gsap
     .timeline({
       onComplete: () => {
+        console.log("Completed pageTransitionTypeOut2");
         hideOverlay();
       },
     })
-    .to("ul.transition--2 li", {
+    .to(elements, {
       duration: 0.7,
-      scaleX: 0, // Reverse of the 'in' animation
+      scaleX: 0,
       transformOrigin: "bottom right",
-      ease: "Power2.easeInOut", // Slow start, slow end, reversed
+      ease: "Power2.easeInOut",
     });
 }
 
-// Object mapping transition types to corresponding functions
 const transitions = {
   type1: pageTransitionType1,
   type2: pageTransitionType2,
@@ -97,6 +105,7 @@ function contentAnimation() {
 }
 
 function contentAnimationForSkills() {
+  console.log("Animating skills content");
   gsap.from("main", {
     duration: 1,
     y: 50,
@@ -106,7 +115,8 @@ function contentAnimationForSkills() {
 }
 
 function contentAnimationForWebsites() {
-  gsap.from(".main", {
+  console.log("Animating websites content");
+  gsap.from("main", {
     duration: 1.5,
     x: 100,
     opacity: 0,
@@ -114,18 +124,20 @@ function contentAnimationForWebsites() {
   });
 }
 
-// Initialize Barba.js with transition logic
 barba.init({
+  cache: false, // Disable Barba.js cache
   transitions: [
     {
       name: "flexible-transition",
       leave(data) {
         const done = this.async();
         currentTransitionType = data.trigger.dataset.transitionType || "type1";
+        console.log("Leave transition type:", currentTransitionType);
         let timeline = transitions[currentTransitionType]();
         timeline.eventCallback("onComplete", done);
       },
       enter(data) {
+        console.log("Enter namespace:", data.next.namespace);
         switch (data.next.namespace) {
           case "skills":
             contentAnimationForSkills();
@@ -134,13 +146,12 @@ barba.init({
             contentAnimationForWebsites();
             break;
           default:
-            // Default content animation
             contentAnimation();
             break;
         }
       },
       once(data) {
-        // This is for the initial page load
+        console.log("Initial load namespace:", data.next.namespace);
         switch (data.next.namespace) {
           case "skills":
             contentAnimationForSkills();
@@ -153,14 +164,26 @@ barba.init({
             break;
         }
       },
-      afterEnter(data) {
-        // Choose the corresponding 'out' animation based on stored type
+      afterEnter() {
+        console.log("After enter transition type:", currentTransitionType);
         let timelineOut =
           currentTransitionType === "type1"
             ? pageTransitionTypeOut1()
             : pageTransitionTypeOut2();
-        timelineOut.play(); // Start the timeline for the exit animation
+        timelineOut.play();
       },
     },
   ],
 });
+
+// Add cache-busting query parameters to links
+function addCacheBustingQueryParams() {
+  document.querySelectorAll("a[data-transition-type]").forEach((link) => {
+    const url = new URL(link.href);
+    url.searchParams.set("v", new Date().getTime());
+    link.href = url.toString();
+  });
+}
+
+// Initial call to add cache-busting query parameters
+addCacheBustingQueryParams();

@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" data-barba="container" data-barba-namespace="home">
+<html lang="en" data-barba="wrapper">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -7,7 +7,7 @@
     <link rel="stylesheet" href="styles.css" />
     <title>Moondiidev</title>
   </head>
-  <body class="font-sans antialiased text-white" data-barba="wrapper">
+  <body class="font-sans antialiased text-white bg-dark">
     <div
       id="overlay"
       style="
@@ -42,7 +42,7 @@
     </ul>
 
     <!-- Main -->
-    <main>
+    <main data-barba="container" data-barba-namespace="home">
       <section class="text-gray-600 body-font">
         <div
           class="bg-image bg-cover bg-center h-screen flex items-center justify-center"
@@ -54,14 +54,20 @@
               <div>
                 <ul class="menu md:-space-y-14">
                   <li>
-                    <a href="skills.html" data-transition-type="type1">
-                      <button class="menu-button">Skills</button>
-                    </a>
+                    <a
+                      href="skills.html"
+                      data-transition-type="type1"
+                      class="menu-button"
+                      >Skills</a
+                    >
                   </li>
                   <li>
-                    <a href="websites.html" data-transition-type="type1">
-                      <button class="menu-button">Websites</button>
-                    </a>
+                    <a
+                      href="websites.html"
+                      data-transition-type="type1"
+                      class="menu-button"
+                      >Websites</a
+                    >
                   </li>
                   <li><button class="menu-button rotate-up">Games</button></li>
                   <li><button class="menu-button rotate-up">Others</button></li>
