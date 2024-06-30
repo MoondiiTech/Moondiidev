@@ -165,7 +165,9 @@ function initVideoControls() {
       }
       video.style.display = "block";
       // Autoplay video when it's loaded
-      video.play();
+      video.play().catch((error) => {
+        console.log("Autoplay prevented:", error);
+      });
     });
 
     video.addEventListener("click", () => {
@@ -185,6 +187,7 @@ function initVideoControls() {
       video.play(); // Play the video in fullscreen
     });
   });
+
   console.log("Video controls initialized.");
 }
 
