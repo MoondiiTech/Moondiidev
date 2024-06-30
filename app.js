@@ -177,6 +177,28 @@ function initVideoControls() {
       video.muted = false; // Unmute the video
       video.play();
     });
+    // Ensure video is correctly handled on iOS
+    video.addEventListener("loadeddata", () => {
+      video.play().catch((error) => {
+        console.error("Error playing video on load:", error);
+      });
+    });
+
+    // Manually trigger play for iOS
+    video
+      .play()
+      .then(() => {
+        console.log("Video playing:", video);
+      })
+      .catch((error) => {
+        console.error("Error playing video:", video, error);
+        // Retry play on user interaction
+        video.addEventListener("click", () => {
+          video.play().catch((err) => {
+            console.error("Retrying play error:", err);
+          });
+        });
+      });
   });
   console.log("Video controls initialized.");
 }
