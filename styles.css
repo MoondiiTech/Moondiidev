@@ -1,22 +1,55 @@
+@font-face {
+  font-family: "Arsenal-Regular";
+  src: url("fonts/Arsenal-Regular.ttf") format("truetype");
+}
+
+@font-face {
+  font-family: "Arsenal-Bold";
+  src: url("fonts/Arsenal-Bold.ttf") format("truetype");
+}
+
+@font-face {
+  font-family: "Arsenal-Italic";
+  src: url("fonts/Arsenal-Italic.ttf") format("truetype");
+}
+
+@font-face {
+  font-family: "Arsenal-BoldItalic";
+  src: url("fonts/Arsenal-BoldItalic.ttf") format("truetype");
+}
+
+@font-face {
+  font-family: "MenuFont";
+  src: url("fonts/ITCAvantGardeStd-Bold.ttf") format("truetype");
+}
 html,
 body {
   height: 100%;
   margin: 0;
   padding: 0;
   overflow-x: hidden;
+  color: #fafafa; /* Set the base font color */
+  font-family: "Arsenal-Regular", sans-serif !important; /* Use the custom font */
 }
 
 body {
   position: relative; /* Position relative to allow absolute positioning of children */
 }
 
+/* Standard website layout container */
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 20px;
+}
 .menu-button {
   position: relative;
   border: none;
-  color: white;
+  color: #fafafa;
   padding: 8px 20px;
   font-size: 4.25rem; /* Adjusting the font size */
   font-weight: bold;
+  font-family: "MenuFont", sans-serif !important; /* Use the custom font */
   text-align: left;
   transition: transform 0.3s ease, color 0.3s ease;
   transform: perspective(500px) rotateY(40deg);
@@ -114,7 +147,13 @@ body {
 }
 
 .screen-frame {
-  margin-bottom: 4rem; /* Increase space between videos */
+  margin-bottom: 2rem; /* Increase space between videos */
+  border: 4px solid rgba(48, 46, 46, 0.114); /* Add a white border around the video */
+  border-radius: 8px; /* Add rounded corners */
+  overflow: hidden; /* Hide any overflow from the video */
+  box-shadow: 0 0 20px rgba(0, 0, 0, 0.5); /* Add a shadow to the video */
+  transition: transform 0.3s ease;
+  padding: 2.5rem; /* Add padding to the video */
 }
 
 .screen-frame video {
@@ -122,11 +161,11 @@ body {
   height: 100%;
   display: block;
   cursor: pointer; /* Change cursor to hand */
-  transition: transform 0.3s ease;
+  transition: transform 0.4s ease;
 }
 
 .screen-frame video:hover {
-  transform: scale(1.05); /* Slightly enlarge the video on hover */
+  transform: scale(1.01) !important; /* Slightly enlarge the video on hover */
 }
 
 .video-title {
@@ -148,4 +187,8 @@ body {
 
 .swiper-pagination-bullet-active {
   background: #0e5f44 !important; /* Change the color of the active bullet */
+}
+
+.custom-text-gold-100 {
+  color: #cc7f2b;
 }

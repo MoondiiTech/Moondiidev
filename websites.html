@@ -28,7 +28,7 @@
 
     <!-- Transition 1 -->
     <ul
-      class="transition--1 flex absolute inset-0 m-0 z-10 pointer-events-none h-screen w-full"
+      class="transition--1 flex absolute inset-0 m-0 z-50 pointer-events-none h-screen w-full"
     >
       <li class="transform scale-y-0 custom-green-100 w-1/6"></li>
       <li class="transform scale-y-0 custom-green-200 w-1/6"></li>
@@ -40,18 +40,69 @@
 
     <!-- Transition 2 -->
     <ul
-      class="transition--2 flex absolute inset-0 m-0 z-10 pointer-events-none h-screen w-full"
+      class="transition--2 flex absolute inset-0 m-0 z-50 pointer-events-none h-screen w-full"
     >
       <li class="transform scale-x-0 custom-green-100 w-full"></li>
     </ul>
 
     <!-- Main -->
-    <main data-barba="container" data-barba-namespace="websites">
+    <main
+      data-barba="container"
+      data-barba-namespace="websites"
+      class="container"
+    >
       <style>
+        #home-button {
+          display: inline-block; /* Ensure the button behaves as a block element */
+          position: relative;
+          border: none;
+          color: #fafafa;
+          padding: 8px 20px;
+          font-size: 4.25rem; /* Adjusting the font size */
+          font-weight: bold;
+          font-family: "MenuFont", sans-serif !important; /* Use the custom font */
+          text-align: left;
+          transition: transform 0.3s ease, color 0.3s ease;
+          transform: perspective(500px) rotateY(40deg);
+          margin-bottom: 10px; /* Negative margin to pack buttons closely */
+          border-radius: 8px; /* Adds rounded corners */
+          background: transparent; /* No background on the button text */
+          overflow: hidden; /* Ensures no overflow from the pseudo-element */
+        }
+
+        #home-button::before {
+          content: "";
+          position: absolute;
+          top: 0;
+          left: 0;
+          right: 0;
+          bottom: 0;
+          clip-path: polygon(2% 15%, 100% 61%, 100% 63%, 7% 84%);
+          transition: background-color 0.3s ease;
+          z-index: -1;
+        }
+
+        #home-button:hover::before,
+        #home-button:focus::before {
+          background: rgba(
+            237,
+            237,
+            237,
+            0.9
+          ); /* Lighter background on hover */
+        }
+
+        #home-button:hover,
+        #home-button:focus {
+          color: #0e5f44; /* Changed to a darker shade of green */
+          transform: perspective(500px) rotateY(0deg);
+          outline: none;
+        }
+
         /* Custom Swiper Navigation Buttons */
         .swiper-button-next,
         .swiper-button-prev {
-          background: linear-gradient(45deg, #0e5f44, #1abc9c);
+          background: linear-gradient(45deg, #0f2831, #1e4351);
           border-radius: 50%;
           width: 50px;
           height: 50px;
@@ -66,7 +117,7 @@
 
         .swiper-button-next:hover,
         .swiper-button-prev:hover {
-          background: linear-gradient(45deg, #1abc9c, #0e5f44);
+          background: linear-gradient(45deg, #1e4351, #0f2831);
           transform: scale(1.1);
         }
 
@@ -76,11 +127,11 @@
         }
 
         .swiper-button-next {
-          right: 10px; /* Adjust as needed */
+          right: 2rem; /* Adjust as needed */
         }
 
         .swiper-button-prev {
-          left: 10px; /* Adjust as needed */
+          left: 2rem; /* Adjust as needed */
         }
 
         .swiper-slide {
@@ -90,14 +141,15 @@
           margin-right: 2rem !important; /* Add spacing between slides */
         }
       </style>
-
-      <a href="index.html" class="menu-button" data-transition-type="type2"
+      <a href="index.html" id="home-button" data-transition-type="type2"
         >HOME</a
       >
       <div
         class="w-full h-full bg-dark flex flex-col items-center justify-center"
       >
-        <h2 class="text-2xl mb-8">Projects</h2>
+        <h2 class="text-5xl mb-12 font-bold custom-text-gold-100">
+          🕸️Web Projects
+        </h2>
         <div class="swiper-container w-full max-w-4xl">
           <div class="swiper-wrapper">
             <!-- Slides -->
@@ -108,7 +160,16 @@
                   Your browser does not support the video tag.
                 </video>
                 <div class="video-title">Project Title 1</div>
-                <div class="video-description">Description for Project 1</div>
+                <div class="video-description">
+                  Lorem ipsum dolor sit amet consectetur adipisicing elit. Quod,
+                  dolorem! Repellendus, minus ut rem maiores blanditiis
+                  obcaecati tempora ex architecto quisquam libero officia,
+                  nostrum autem voluptatibus laboriosam iure excepturi vel?
+                  Lorem ipsum dolor sit amet consectetur adipisicing elit. Quod,
+                  dolorem! Repellendus, minus ut rem maiores blanditiis
+                  obcaecati tempora ex architecto quisquam libero officia,
+                  nostrum autem voluptatibus laboriosam iure excepturi vel?
+                </div>
               </div>
             </div>
             <div class="swiper-slide flex flex-col items-center">
@@ -134,7 +195,7 @@
             <!-- Add more slides as needed -->
           </div>
           <!-- Add Pagination -->
-          <div class="swiper-pagination"></div>
+          <div class="swiper-pagination relative"></div>
           <!-- Add Navigation -->
           <div class="swiper-button-next"></div>
           <div class="swiper-button-prev"></div>

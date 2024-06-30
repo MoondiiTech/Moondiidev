@@ -117,8 +117,7 @@ function contentAnimationForSkills() {
 function contentAnimationForWebsites() {
   console.log("Animating websites content");
   gsap.from("main", {
-    duration: 1.5,
-    x: 100,
+    duration: 1,
     opacity: 0,
     ease: "power2.inOut",
   });
