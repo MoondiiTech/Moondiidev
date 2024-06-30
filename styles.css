@@ -3,7 +3,7 @@ body {
   height: 100%;
   margin: 0;
   padding: 0;
-  overflow: hidden; /* Prevent scrolling */
+  overflow-x: hidden;
 }
 
 body {
@@ -101,4 +101,22 @@ body {
 
 .bg-dark {
   background-color: #0e1011;
+}
+
+.screen-frame {
+  position: relative;
+  width: 80%;
+  padding-top: 45%; /* 16:9 Aspect Ratio */
+  background: #000;
+  border: 4px solid #333;
+  border-radius: 12px;
+  box-shadow: 0 0 20px rgba(0, 0, 0, 0.5);
+  margin: 0 auto;
+}
+.screen-frame video {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
 }

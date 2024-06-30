@@ -101,7 +101,12 @@ const transitions = {
 // Content animation function for general page content
 function contentAnimation() {
   console.log("Animating content");
-  gsap.from(".menu", { duration: 1, y: 30, opacity: 0, ease: "power2.inOut" });
+  gsap.from(".menu", {
+    duration: 1,
+    y: 30,
+    opacity: 0,
+    ease: "power2.inOut",
+  });
 }
 
 function contentAnimationForSkills() {
@@ -122,6 +127,29 @@ function contentAnimationForWebsites() {
     opacity: 0,
     ease: "power2.inOut",
   });
+}
+
+// Function to initialize Swiper.js
+function initSwiper() {
+  console.log("Initializing Swiper");
+  new Swiper(".swiper-container", {
+    slidesPerView: 1,
+    spaceBetween: 10,
+    loop: true,
+    pagination: {
+      el: ".swiper-pagination",
+      clickable: true,
+    },
+    navigation: {
+      nextEl: ".swiper-button-next",
+      prevEl: ".swiper-button-prev",
+    },
+  });
+}
+
+// Function to re-enable interactions
+function enableInteractions() {
+  document.querySelector("body").style.pointerEvents = "auto";
 }
 
 barba.init({
@@ -149,6 +177,7 @@ barba.init({
             contentAnimation();
             break;
         }
+        enableInteractions();
       },
       once(data) {
         console.log("Initial load namespace:", data.next.namespace);
@@ -163,27 +192,23 @@ barba.init({
             contentAnimation();
             break;
         }
+        enableInteractions();
       },
-      afterEnter() {
+      afterEnter(data) {
         console.log("After enter transition type:", currentTransitionType);
         let timelineOut =
           currentTransitionType === "type1"
             ? pageTransitionTypeOut1()
             : pageTransitionTypeOut2();
+        timelineOut.eventCallback("onComplete", () => {
+          if (data.next.namespace === "websites") {
+            initSwiper(); // Reinitialize Swiper after transition out completes
+          }
+          hideOverlay(); // Ensure overlay is hidden after enter transition
+        });
         timelineOut.play();
+        enableInteractions();
       },
     },
   ],
 });
-
-// Add cache-busting query parameters to links
-function addCacheBustingQueryParams() {
-  document.querySelectorAll("a[data-transition-type]").forEach((link) => {
-    const url = new URL(link.href);
-    url.searchParams.set("v", new Date().getTime());
-    link.href = url.toString();
-  });
-}
-
-// Initial call to add cache-busting query parameters
-addCacheBustingQueryParams();
