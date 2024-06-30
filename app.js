@@ -155,21 +155,24 @@ function initVideoControls() {
   console.log("Found videos:", videos);
   videos.forEach((video) => {
     video.addEventListener("mouseenter", () => {
-      video.controls = true;
-      console.log("Showing controls for video", video);
+      video.style.transform = "scale(1.05)"; // Slightly enlarge the video
     });
     video.addEventListener("mouseleave", () => {
-      video.controls = false;
-      console.log("Hiding controls for video", video);
+      video.style.transform = "scale(1)"; // Reset the video size
     });
-    video
-      .play()
-      .then(() => {
-        console.log("Video playing:", video);
-      })
-      .catch((error) => {
-        console.error("Error playing video:", video, error);
-      });
+    video.addEventListener("click", () => {
+      if (video.requestFullscreen) {
+        video.requestFullscreen();
+      } else if (video.mozRequestFullScreen) {
+        video.mozRequestFullScreen(); // Firefox
+      } else if (video.webkitRequestFullscreen) {
+        video.webkitRequestFullscreen(); // Chrome, Safari and Opera
+      } else if (video.msRequestFullscreen) {
+        video.msRequestFullscreen(); // IE/Edge
+      }
+      video.muted = false; // Unmute the video
+      video.play();
+    });
   });
   console.log("Video controls initialized.");
 }

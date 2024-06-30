@@ -122,14 +122,11 @@ body {
   height: 100%;
   display: block;
   cursor: pointer; /* Change cursor to hand */
+  transition: transform 0.3s ease;
 }
 
-.screen-frame video:hover::-webkit-media-controls,
-.screen-frame video:hover::cue,
-.screen-frame video:hover::cue-list {
-  display: block !important;
-  opacity: 1;
-  transition: opacity 0.3s;
+.screen-frame video:hover {
+  transform: scale(1.05); /* Slightly enlarge the video on hover */
 }
 
 .video-title {
