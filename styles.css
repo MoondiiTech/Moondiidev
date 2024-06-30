@@ -98,3 +98,7 @@ body {
   z-index: 9999; /* Make sure this is above all other content */
   background: rgba(0, 0, 0, 0); /* transparent, adjust as needed */
 }
+
+.bg-dark {
+  background-color: #0e1011;
+}
