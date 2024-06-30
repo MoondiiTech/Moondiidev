@@ -168,14 +168,12 @@ function initVideoControls() {
     // Handle video canplaythrough event for better reliability on iOS
     video.addEventListener("canplaythrough", () => {
       video.style.display = "block";
-      if (!isIOS) {
-        video.play().catch(() => {
-          console.log("Autoplay failed");
-        });
-      }
+      video.play().catch(() => {
+        console.log("Autoplay failed");
+      });
     });
 
-    // Attempt to play video on iOS (requires user interaction)
+    // For iOS specifically
     if (isIOS) {
       video.play().catch(() => {
         console.log("Autoplay failed on iOS");
@@ -198,7 +196,9 @@ function initVideoControls() {
         video.msRequestFullscreen(); // IE/Edge
       }
       video.muted = false; // Unmute the video
-      video.play();
+      video.play().catch(() => {
+        console.log("Play on click failed");
+      });
     });
   });
 
