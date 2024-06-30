@@ -159,20 +159,19 @@ function initVideoControls() {
     // Remove autoplay attribute
     video.removeAttribute("autoplay");
 
-    video.addEventListener("loadeddata", () => {
+    const hideLoader = () => {
       if (loader) {
         loader.style.display = "none";
       }
       video.style.display = "block";
       // Autoplay video when it's loaded
-      video.play().catch((error) => {
-        console.log("Autoplay prevented:", error);
-      });
-    });
+      video.play();
+    };
+
+    video.addEventListener("loadeddata", hideLoader);
+    video.addEventListener("canplaythrough", hideLoader);
 
     video.addEventListener("click", () => {
-      video.pause(); // Ensure the video pauses before entering fullscreen
-
       if (video.requestFullscreen) {
         video.requestFullscreen();
       } else if (video.mozRequestFullScreen) {
@@ -182,12 +181,10 @@ function initVideoControls() {
       } else if (video.msRequestFullscreen) {
         video.msRequestFullscreen(); // IE/Edge
       }
-
       video.muted = false; // Unmute the video
-      video.play(); // Play the video in fullscreen
+      video.play();
     });
   });
-
   console.log("Video controls initialized.");
 }
 
