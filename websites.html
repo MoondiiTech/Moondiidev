@@ -145,6 +145,10 @@
             margin-right: 2rem !important; /* Add spacing between slides on medium and larger screens */
           }
         }
+
+        .screen-frame {
+          position: relative;
+        }
       </style>
       <a href="index.html" id="home-button" data-transition-type="type2"
         >HOME</a
@@ -160,8 +164,12 @@
             <!-- Slides -->
             <div class="swiper-slide flex flex-col items-center">
               <div class="screen-frame">
-                <div class="loader"></div>
-                <video class="custom-video" loop muted preload="metadata">
+                <video
+                  class="custom-video"
+                  loop
+                  muted
+                  poster="example-video1.jpg"
+                >
                   <source src="example-video1.mp4" type="video/mp4" />
                   Your browser does not support the video tag.
                 </video>
@@ -180,8 +188,12 @@
             </div>
             <div class="swiper-slide flex flex-col items-center">
               <div class="screen-frame">
-                <div class="loader"></div>
-                <video class="custom-video" loop muted preload="metadata">
+                <video
+                  class="custom-video"
+                  loop
+                  muted
+                  poster="example-video2.jpg"
+                >
                   <source src="example-video2.mp4" type="video/mp4" />
                   Your browser does not support the video tag.
                 </video>
@@ -191,8 +203,12 @@
             </div>
             <div class="swiper-slide flex flex-col items-center">
               <div class="screen-frame">
-                <div class="loader"></div>
-                <video class="custom-video" loop muted preload="metadata">
+                <video
+                  class="custom-video"
+                  loop
+                  muted
+                  poster="example-video3.jpg"
+                >
                   <source src="example-video3.mp4" type="video/mp4" />
                   Your browser does not support the video tag.
                 </video>

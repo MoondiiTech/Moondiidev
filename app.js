@@ -156,52 +156,27 @@ function initVideoControls() {
   const isIOS = /iPad|iPhone|iPod/.test(navigator.userAgent);
 
   videos.forEach((video) => {
-    const loader = video.parentElement.querySelector(".loader");
-
-    // Autoplay handling for iOS devices
-    if (isIOS) {
-      video.autoplay = true;
-      video.muted = true;
-    } else {
-      video.removeAttribute("autoplay");
+    // Set poster attribute for preview
+    if (video.dataset.poster) {
+      video.setAttribute("poster", video.dataset.poster);
     }
 
-    // Show loader and hide video initially
-    video.style.display = "none";
-    loader.style.display = "block";
+    // Remove autoplay attribute for iOS
+    if (isIOS) {
+      video.removeAttribute("autoplay");
+      video.muted = true;
+    }
 
-    // Handle video loaded metadata event
-    video.addEventListener("loadedmetadata", () => {
-      if (video.readyState > 2) {
-        // readyState 3 means the video is ready to play
-        if (loader) {
-          loader.style.display = "none";
-        }
-        video.style.display = "block";
-        if (!isIOS) {
-          video.play().catch(() => {});
-        }
-      }
-    });
+    // Show video initially
+    video.style.display = "block";
 
-    // Handle video can play event
-    video.addEventListener("canplay", () => {
-      if (loader) {
-        loader.style.display = "none";
-      }
+    // Handle video canplaythrough event for better reliability on iOS
+    video.addEventListener("canplaythrough", () => {
       video.style.display = "block";
       if (!isIOS) {
         video.play().catch(() => {});
       }
     });
-
-    // Fallback to hide loader after a certain time
-    setTimeout(() => {
-      if (loader) {
-        loader.style.display = "none";
-      }
-      video.style.display = "block";
-    }, 5000); // 5 seconds timeout as a fallback
 
     // Event listener for click to go fullscreen
     video.addEventListener("click", () => {
