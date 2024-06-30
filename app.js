@@ -122,7 +122,10 @@ function contentAnimationForWebsites() {
     ease: "power2.inOut",
   });
 }
-
+function prepareTransition(namespace) {
+  console.log(`Preparing transition to ${namespace}...`);
+  initializePage();
+}
 function initializePage() {
   console.log("Initializing page...");
   initSwiper();
@@ -153,12 +156,14 @@ function initVideoControls() {
   const videos = document.querySelectorAll(".custom-video");
   console.log("Found videos:", videos);
   videos.forEach((video) => {
-    video.addEventListener("mouseenter", () => {
-      video.style.transform = "scale(1.05)"; // Slightly enlarge the video
-    });
-    video.addEventListener("mouseleave", () => {
-      video.style.transform = "scale(1)"; // Reset the video size
-    });
+    video
+      .play()
+      .then(() => {
+        console.log("Video playing:", video);
+      })
+      .catch((error) => {
+        console.error("Error playing video:", video, error);
+      });
     video.addEventListener("click", () => {
       if (video.requestFullscreen) {
         video.requestFullscreen();
