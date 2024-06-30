@@ -148,7 +148,6 @@ function initSwiper() {
   });
   console.log("Swiper initialized.");
 }
-
 function initVideoControls() {
   console.log("Initializing video controls...");
   const videos = document.querySelectorAll(".custom-video");
@@ -159,27 +158,35 @@ function initVideoControls() {
   videos.forEach((video) => {
     const loader = video.parentElement.querySelector(".loader");
 
-    // Remove autoplay attribute if not iOS
-    if (!isIOS) {
-      video.removeAttribute("autoplay");
-    } else {
+    // Autoplay handling for iOS devices
+    if (isIOS) {
       video.autoplay = true;
+      video.muted = true;
+    } else {
+      video.removeAttribute("autoplay");
     }
 
-    // Listen for the progress event instead of loadeddata for iOS compatibility
-    video.addEventListener("progress", () => {
-      if (video.readyState > 2) {
-        // readyState 3 means the video is ready to play
-        if (loader) {
-          loader.style.display = "none";
-        }
-        video.style.display = "block";
-        if (!isIOS) {
-          video.play();
-        }
-      }
-    });
+    // Show loader and hide video initially
+    video.style.display = "none";
+    loader.style.display = "block";
 
+    // Listen for the progress event instead of loadeddata for iOS compatibility
+    video.addEventListener(
+      "progress",
+      () => {
+        if (video.readyState > 2) {
+          // readyState 3 means the video is ready to play
+          if (loader) {
+            loader.style.display = "none";
+          }
+          video.style.display = "block";
+          video.play().catch(() => {}); // Play video if not iOS
+        }
+      },
+      { once: true }
+    );
+
+    // Event listener for click to go fullscreen
     video.addEventListener("click", () => {
       if (video.requestFullscreen) {
         video.requestFullscreen();
@@ -194,6 +201,7 @@ function initVideoControls() {
       video.play();
     });
   });
+
   console.log("Video controls initialized.");
 }
 
