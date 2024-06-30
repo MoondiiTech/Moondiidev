@@ -170,21 +170,30 @@ function initVideoControls() {
     video.style.display = "none";
     loader.style.display = "block";
 
-    // Listen for the progress event instead of loadeddata for iOS compatibility
-    video.addEventListener(
-      "progress",
-      () => {
-        if (video.readyState > 2) {
-          // readyState 3 means the video is ready to play
-          if (loader) {
-            loader.style.display = "none";
-          }
-          video.style.display = "block";
-          video.play().catch(() => {}); // Play video if not iOS
+    // Handle video loaded metadata event
+    video.addEventListener("loadedmetadata", () => {
+      if (video.readyState > 2) {
+        // readyState 3 means the video is ready to play
+        if (loader) {
+          loader.style.display = "none";
         }
-      },
-      { once: true }
-    );
+        video.style.display = "block";
+        if (!isIOS) {
+          video.play().catch(() => {});
+        }
+      }
+    });
+
+    // Handle video can play event
+    video.addEventListener("canplay", () => {
+      if (loader) {
+        loader.style.display = "none";
+      }
+      video.style.display = "block";
+      if (!isIOS) {
+        video.play().catch(() => {});
+      }
+    });
 
     // Event listener for click to go fullscreen
     video.addEventListener("click", () => {
