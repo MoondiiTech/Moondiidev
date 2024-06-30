@@ -155,7 +155,6 @@ function initVideoControls() {
   console.log("Found videos:", videos);
 
   videos.forEach((video) => {
-    video.play();
     // Set poster attribute for preview
     if (video.dataset.poster) {
       video.setAttribute("poster", video.dataset.poster);
@@ -167,10 +166,21 @@ function initVideoControls() {
     // Handle video canplaythrough event for better reliability on iOS
     video.addEventListener("canplaythrough", () => {
       video.style.display = "block";
-      if (!isIOS) {
-        video.play().catch(() => {});
-      }
+      video.play().catch(() => {
+        console.log("Autoplay failed");
+      });
     });
+
+    // For iOS specifically
+    if (/iPad|iPhone|iPod/.test(navigator.userAgent)) {
+      video.play().catch(() => {
+        console.log("Autoplay failed on iOS");
+      });
+    } else {
+      video.play().catch(() => {
+        console.log("Autoplay failed");
+      });
+    }
 
     // Event listener for click to go fullscreen
     video.addEventListener("click", () => {
