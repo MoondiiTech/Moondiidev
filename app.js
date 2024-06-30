@@ -154,19 +154,30 @@ function initVideoControls() {
   const videos = document.querySelectorAll(".custom-video");
   console.log("Found videos:", videos);
 
+  const isIOS = /iPad|iPhone|iPod/.test(navigator.userAgent);
+
   videos.forEach((video) => {
     const loader = video.parentElement.querySelector(".loader");
 
-    // Remove autoplay attribute
-    video.removeAttribute("autoplay");
+    // Remove autoplay attribute if not iOS
+    if (!isIOS) {
+      video.removeAttribute("autoplay");
+    } else {
+      video.autoplay = true;
+    }
 
-    video.addEventListener("loadeddata", () => {
-      if (loader) {
-        loader.style.display = "none";
+    // Listen for the progress event instead of loadeddata for iOS compatibility
+    video.addEventListener("progress", () => {
+      if (video.readyState > 2) {
+        // readyState 3 means the video is ready to play
+        if (loader) {
+          loader.style.display = "none";
+        }
+        video.style.display = "block";
+        if (!isIOS) {
+          video.play();
+        }
       }
-      video.style.display = "block";
-      // Autoplay video when it's loaded
-      video.play();
     });
 
     video.addEventListener("click", () => {
