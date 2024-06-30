@@ -156,7 +156,7 @@ function initVideoControls() {
   const isIOS = /iPad|iPhone|iPod/.test(navigator.userAgent);
 
   videos.forEach((video) => {
-    video.play();
+    const loader = video.parentElement.querySelector(".loader");
 
     // Autoplay handling for iOS devices
     if (isIOS) {
@@ -166,10 +166,17 @@ function initVideoControls() {
       video.removeAttribute("autoplay");
     }
 
+    // Show loader and hide video initially
+    video.style.display = "none";
+    loader.style.display = "block";
+
     // Handle video loaded metadata event
     video.addEventListener("loadedmetadata", () => {
       if (video.readyState > 2) {
         // readyState 3 means the video is ready to play
+        if (loader) {
+          loader.style.display = "none";
+        }
         video.style.display = "block";
         if (!isIOS) {
           video.play().catch(() => {});
@@ -179,6 +186,9 @@ function initVideoControls() {
 
     // Handle video can play event
     video.addEventListener("canplay", () => {
+      if (loader) {
+        loader.style.display = "none";
+      }
       video.style.display = "block";
       if (!isIOS) {
         video.play().catch(() => {});
@@ -187,6 +197,9 @@ function initVideoControls() {
 
     // Fallback to hide loader after a certain time
     setTimeout(() => {
+      if (loader) {
+        loader.style.display = "none";
+      }
       video.style.display = "block";
     }, 5000); // 5 seconds timeout as a fallback
 
