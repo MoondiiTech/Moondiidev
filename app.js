@@ -153,29 +153,47 @@ function initVideoControls() {
   const videos = document.querySelectorAll(".custom-video");
   console.log("Found videos:", videos);
 
-  const isDesktop = /Windows|Macintosh|Linux/.test(navigator.userAgent);
+  const isIOS = /iPad|iPhone|iPod/.test(navigator.userAgent);
 
   videos.forEach((video) => {
     const loader = video.parentElement.querySelector(".loader");
-    video.load();
+
+    // Autoplay handling for iOS devices
+    if (isIOS) {
+      video.autoplay = true;
+      video.muted = true;
+    } else {
+      video.removeAttribute("autoplay");
+    }
 
     // Show loader and hide video initially
     video.style.display = "none";
     loader.style.display = "block";
 
-    // Handle video readiness
-    const handleVideoReady = () => {
+    // Handle video loaded metadata event
+    video.addEventListener("loadedmetadata", () => {
+      if (video.readyState > 2) {
+        // readyState 3 means the video is ready to play
+        if (loader) {
+          loader.style.display = "none";
+        }
+        video.style.display = "block";
+        if (!isIOS) {
+          video.play().catch(() => {});
+        }
+      }
+    });
+
+    // Handle video can play event
+    video.addEventListener("canplay", () => {
       if (loader) {
         loader.style.display = "none";
       }
       video.style.display = "block";
-      if (isDesktop) {
+      if (!isIOS) {
         video.play().catch(() => {});
       }
-    };
-
-    // Event listener for canplaythrough to ensure video is ready to play
-    video.addEventListener("canplaythrough", handleVideoReady);
+    });
 
     // Fallback to hide loader after a certain time
     setTimeout(() => {
@@ -187,35 +205,17 @@ function initVideoControls() {
 
     // Event listener for click to go fullscreen
     video.addEventListener("click", () => {
-      console.log("Video clicked");
-      video.muted = false; // Unmute the video
-      video
-        .play()
-        .then(() => {
-          if (video.requestFullscreen) {
-            console.log("Requesting fullscreen with requestFullscreen");
-            video.requestFullscreen();
-          } else if (video.mozRequestFullScreen) {
-            console.log("Requesting fullscreen with mozRequestFullScreen");
-            video.mozRequestFullScreen(); // Firefox
-          } else if (video.webkitRequestFullscreen) {
-            console.log("Requesting fullscreen with webkitRequestFullscreen");
-            video.webkitRequestFullscreen(); // Chrome, Safari and Opera
-          } else if (video.msRequestFullscreen) {
-            console.log("Requesting fullscreen with msRequestFullscreen");
-            video.msRequestFullscreen(); // IE/Edge
-          }
-        })
-        .catch((error) => {
-          console.log("Error playing video:", error);
-        });
-    });
-
-    // Additional event listener to ensure the video is ready
-    video.addEventListener("loadeddata", () => {
-      if (video.readyState > 2) {
-        handleVideoReady();
+      if (video.requestFullscreen) {
+        video.requestFullscreen();
+      } else if (video.mozRequestFullScreen) {
+        video.mozRequestFullScreen(); // Firefox
+      } else if (video.webkitRequestFullscreen) {
+        video.webkitRequestFullscreen(); // Chrome, Safari and Opera
+      } else if (video.msRequestFullscreen) {
+        video.msRequestFullscreen(); // IE/Edge
       }
+      video.muted = false; // Unmute the video
+      video.play();
     });
   });
 
