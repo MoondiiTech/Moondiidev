@@ -257,6 +257,7 @@ function initVideoControls() {
     document.addEventListener("fullscreenchange", () => {
       if (!document.fullscreenElement) {
         video.muted = true; // Mute the video
+        video.play();
       }
     });
   });
