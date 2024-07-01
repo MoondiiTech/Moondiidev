@@ -112,7 +112,7 @@
           z-index: 10; /* Ensure buttons are above the content */
           position: absolute; /* Position them absolutely */
           top: 50%; /* Center vertically */
-          transform: translateY(50%);
+          transform: translateY(-50%);
         }
 
         .swiper-button-next {
@@ -126,7 +126,7 @@
         .swiper-button-next:hover,
         .swiper-button-prev:hover {
           background: linear-gradient(45deg, #1e4351, #0f2831);
-          transform: translateY(50%) scale(1.05); /* Scale up on hover */
+          transform: translateY(-50%) scale(1.05); /* Scale up on hover */
         }
 
         .swiper-button-next::after,
@@ -158,17 +158,27 @@
             left: 0;
           }
         }
-        @media (min-width: 768px) {
-          .swiper-slide {
-            margin-right: 2rem !important; /* Add spacing between slides on medium and larger screens */
-          }
-        }
-        /* *********************** */
 
         .swiper-slide {
           display: flex;
           flex-direction: column;
           align-items: center;
+          position: relative;
+        }
+
+        .swiper-slide .overlay {
+          position: absolute;
+          top: 0;
+          left: 0;
+          width: 100%;
+          height: 100%;
+          background: rgba(0, 0, 0, 0.5);
+          z-index: 9;
+          display: block;
+        }
+
+        .swiper-slide-active .overlay {
+          display: none; /* Hide overlay for active slide */
         }
 
         @media (min-width: 768px) {
@@ -216,6 +226,7 @@
                   nostrum autem voluptatibus laboriosam iure excepturi vel?
                 </div>
               </div>
+              <div class="overlay"></div>
             </div>
             <div class="swiper-slide flex flex-col items-center">
               <div class="screen-frame">
@@ -235,6 +246,7 @@
                 <div class="video-title">Project Title 2</div>
                 <div class="video-description">Description for Project 2</div>
               </div>
+              <div class="overlay"></div>
             </div>
             <div class="swiper-slide flex flex-col items-center">
               <div class="screen-frame">
@@ -254,6 +266,7 @@
                 <div class="video-title">Project Title 3</div>
                 <div class="video-description">Description for Project 3</div>
               </div>
+              <div class="overlay"></div>
             </div>
             <!-- Add more slides as needed -->
           </div>
