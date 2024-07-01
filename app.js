@@ -153,13 +153,13 @@ function initVideoControls() {
   const videos = document.querySelectorAll(".custom-video");
   console.log("Found videos:", videos);
 
-  const isIOS = /iPad|iPhone|iPod/.test(navigator.userAgent);
+  const isComputer = /Windows|Macintosh|Linux/.test(navigator.userAgent);
 
   videos.forEach((video) => {
     const loader = video.parentElement.querySelector(".loader");
-
-    // Autoplay handling for iOS devices
-    if (isIOS) {
+    video.load();
+    // Autoplay handling
+    if (!isComputer) {
       video.autoplay = true;
       video.muted = true;
     } else {
@@ -178,7 +178,7 @@ function initVideoControls() {
           loader.style.display = "none";
         }
         video.style.display = "block";
-        if (!isIOS) {
+        if (isComputer) {
           video.play().catch(() => {});
         }
       }
@@ -190,7 +190,7 @@ function initVideoControls() {
         loader.style.display = "none";
       }
       video.style.display = "block";
-      if (!isIOS) {
+      if (isComputer) {
         video.play().catch(() => {});
       }
     });
