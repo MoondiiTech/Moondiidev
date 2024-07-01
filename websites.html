@@ -166,19 +166,22 @@
           position: relative;
         }
 
-        .swiper-slide .overlay {
-          position: absolute;
-          top: 0;
-          left: 0;
-          width: 100%;
-          height: 100%;
-          background: rgba(0, 0, 0, 0.5);
-          z-index: 9;
-          display: block;
-        }
+        /* Apply overlay styles for devices larger than mobile */
+        @media (min-width: 768px) {
+          .swiper-slide .overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.5);
+            z-index: 9;
+            display: block;
+          }
 
-        .swiper-slide-active .overlay {
-          display: none; /* Hide overlay for active slide */
+          .swiper-slide-active .overlay {
+            display: none; /* Hide overlay for active slide */
+          }
         }
 
         @media (min-width: 768px) {
