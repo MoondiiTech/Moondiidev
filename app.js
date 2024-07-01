@@ -166,6 +166,32 @@ function initSwiper() {
       prevEl: ".swiper-button-prev",
     },
   });
+
+  const cooldown = 100; // Cooldown period in milliseconds
+  let isCooldown = false; // Flag to manage cooldown state
+
+  const handleButtonClick = (button, action) => {
+    if (!isCooldown) {
+      isCooldown = true;
+      button.classList.add("disabled"); // Optionally, add a CSS class to visually disable the button
+      action();
+      setTimeout(() => {
+        isCooldown = false;
+        button.classList.remove("disabled"); // Remove the CSS class to enable the button
+      }, cooldown);
+    }
+  };
+
+  const nextButton = document.querySelector(".swiper-button-next");
+  const prevButton = document.querySelector(".swiper-button-prev");
+
+  nextButton.addEventListener("click", () =>
+    handleButtonClick(nextButton, () => swiper.slideNext())
+  );
+  prevButton.addEventListener("click", () =>
+    handleButtonClick(prevButton, () => swiper.slidePrev())
+  );
+
   console.log("Swiper initialized.");
 }
 

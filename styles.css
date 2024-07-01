@@ -242,3 +242,8 @@ body {
   ); /* Ensure the video area is dark when not loaded */
   border-radius: 8px; /* Add rounded corners to the video container */
 }
+
+.disabled {
+  opacity: 0.5;
+  pointer-events: none; /* Prevents further clicks */
+}
