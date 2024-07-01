@@ -53,7 +53,7 @@ body {
   text-align: left;
   transition: transform 0.3s ease, color 0.3s ease;
   transform: perspective(500px) rotateY(40deg);
-  margin-bottom: -10px; /* Negative margin to pack buttons closely */
+  margin-bottom: -15px; /* Negative margin to pack buttons closely */
   border-radius: 8px; /* Adds rounded corners */
   background: transparent; /* No background on the button text */
   overflow: hidden; /* Ensures no overflow from the pseudo-element */
