@@ -148,6 +148,7 @@ function initSwiper() {
   });
   console.log("Swiper initialized.");
 }
+
 function initVideoControls() {
   console.log("Initializing video controls...");
   const videos = document.querySelectorAll(".custom-video");
@@ -158,34 +159,13 @@ function initVideoControls() {
   videos.forEach((video) => {
     const loader = video.parentElement.querySelector(".loader");
     video.load();
-    // Autoplay handling
-    if (!isComputer) {
-      video.autoplay = true;
-      video.muted = true;
-    } else {
-      video.removeAttribute("autoplay");
-    }
 
     // Show loader and hide video initially
     video.style.display = "none";
     loader.style.display = "block";
 
-    // Handle video loaded metadata event
-    video.addEventListener("loadedmetadata", () => {
-      if (video.readyState > 2) {
-        // readyState 3 means the video is ready to play
-        if (loader) {
-          loader.style.display = "none";
-        }
-        video.style.display = "block";
-        if (isComputer) {
-          video.play().catch(() => {});
-        }
-      }
-    });
-
-    // Handle video can play event
-    video.addEventListener("canplay", () => {
+    // Combined event listener for video readiness
+    const handleVideoReady = () => {
       if (loader) {
         loader.style.display = "none";
       }
@@ -193,7 +173,9 @@ function initVideoControls() {
       if (isComputer) {
         video.play().catch(() => {});
       }
-    });
+    };
+
+    video.addEventListener("canplaythrough", handleVideoReady);
 
     // Fallback to hide loader after a certain time
     setTimeout(() => {
