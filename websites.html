@@ -106,15 +106,12 @@
           border-radius: 50%;
           width: 50px;
           height: 50px;
-          display: flex;
-          align-items: center;
-          justify-content: center;
           color: white;
           box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
           transition: background 0.3s ease, transform 0.3s ease;
           z-index: 10; /* Ensure buttons are above the content */
           position: absolute; /* Position them absolutely */
-          top: calc(50% + 25px); /* Center vertically */
+          top: 50%; /* Center vertically */
           transform: translateY(50%);
         }
 
@@ -135,6 +132,13 @@
         .swiper-button-next::after,
         .swiper-button-prev::after {
           font-size: 20px;
+        }
+
+        .swiper-buttons {
+          display: flex;
+          justify-content: space-between;
+          align-items: center;
+          width: 100%;
         }
 
         @media (max-width: 767px) {
@@ -177,7 +181,7 @@
         <a href="index.html" data-transition-type="type2">HOME</a>
       </button>
       <div
-        class="w-full h-full bg-dark flex flex-col items-center justify-center"
+        class="w-full h-full bg-dark flex flex-col items-center justify-center relative"
       >
         <h2 class="text-5xl mb-12 font-bold custom-text-gold-100">
           🕸️Web Projects
@@ -253,14 +257,14 @@
             </div>
             <!-- Add more slides as needed -->
           </div>
-          <!-- Add Navigation -->
-          <div class="swiper-buttons">
-            <div class="swiper-button-prev"></div>
-            <div class="swiper-button-next"></div>
-          </div>
-          <!-- Add Pagination -->
-          <div class="swiper-pagination relative"></div>
         </div>
+        <!-- Add Navigation -->
+        <div class="swiper-buttons">
+          <div class="swiper-button-prev"></div>
+          <div class="swiper-button-next"></div>
+        </div>
+        <!-- Add Pagination -->
+        <div class="swiper-pagination relative"></div>
       </div>
     </main>
 
