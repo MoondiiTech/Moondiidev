@@ -148,39 +148,45 @@ function initSwiper() {
   });
   console.log("Swiper initialized.");
 }
+
 function initVideoControls() {
   console.log("Initializing video controls...");
   const videos = document.querySelectorAll(".custom-video");
   console.log("Found videos:", videos);
 
-  const isIOS = /iPad|iPhone|iPod/.test(navigator.userAgent);
+  // Check if the device is a computer
+  const isComputer = /Windows|Macintosh|Linux/.test(navigator.userAgent);
 
   videos.forEach((video) => {
     const loader = video.parentElement.querySelector(".loader");
     video.load();
+    video.muted = true;
 
-    // Autoplay handling for iOS devices
-    if (isIOS) {
-      video.autoplay = true;
-      video.muted = true;
-    } else {
+    // Autoplay handling for computers
+    if (isComputer) {
       video.removeAttribute("autoplay");
+      video.play().catch(() => {});
+    } else {
+      video.autoplay = false;
     }
 
     // Show loader and hide video initially
     video.style.display = "none";
-    loader.style.display = "block";
+    if (loader) {
+      loader.style.display = "block";
+    }
 
     // Handle video can play event
     video.addEventListener("canplay", () => {
+      console.log("Video can play event triggered");
+
       if (loader) {
         loader.style.display = "none";
       }
       video.style.display = "block";
-      // if (!isIOS) {
-      //   video.play();
-      // }
-      video.play();
+      if (isComputer) {
+        video.play().catch(() => {});
+      }
     });
 
     // Fallback to hide loader after a certain time
