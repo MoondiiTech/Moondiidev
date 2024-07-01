@@ -113,12 +113,23 @@
           box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
           transition: background 0.3s ease, transform 0.3s ease;
           z-index: 10; /* Ensure buttons are above the content */
+          position: absolute; /* Position them absolutely */
+          top: calc(50% + 25px); /* Center vertically */
+          transform: translateY(50%);
+        }
+
+        .swiper-button-next {
+          right: 25px;
+        }
+
+        .swiper-button-prev {
+          left: 25px;
         }
 
         .swiper-button-next:hover,
         .swiper-button-prev:hover {
           background: linear-gradient(45deg, #1e4351, #0f2831);
-          transform: scale(1.1);
+          transform: translateY(50%) scale(1.05); /* Scale up on hover */
         }
 
         .swiper-button-next::after,
@@ -126,13 +137,7 @@
           font-size: 20px;
         }
 
-        .swiper-button-next {
-          right: 2rem; /* Adjust as needed */
-        }
-
-        .swiper-button-prev {
-          left: 2rem; /* Adjust as needed */
-        }
+        /* *********************** */
 
         .swiper-slide {
           display: flex;
