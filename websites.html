@@ -146,9 +146,9 @@
           }
         }
       </style>
-      <a href="index.html" id="home-button" data-transition-type="type2"
-        >HOME</a
-      >
+      <button id="home-button">
+        <a href="index.html" data-transition-type="type2">HOME</a>
+      </button>
       <div
         class="w-full h-full bg-dark flex flex-col items-center justify-center"
       >
@@ -160,17 +160,19 @@
             <!-- Slides -->
             <div class="swiper-slide flex flex-col items-center">
               <div class="screen-frame">
-                <div class="loader"></div>
-                <video
-                  class="custom-video"
-                  loop
-                  muted
-                  preload="metadata"
-                  poster="video-thumbnail.png"
-                >
-                  <source src="example-video1.mp4" type="video/mp4" />
-                  Your browser does not support the video tag.
-                </video>
+                <div class="video-container">
+                  <div class="loader"></div>
+                  <video
+                    class="custom-video"
+                    loop
+                    muted
+                    preload="metadata"
+                    poster="video-thumbnail.png"
+                  >
+                    <source src="example-video1.mp4" type="video/mp4" />
+                    Your browser does not support the video tag.
+                  </video>
+                </div>
                 <div class="video-title">Project Title 1</div>
                 <div class="video-description">
                   Lorem ipsum dolor sit amet consectetur adipisicing elit. Quod,
@@ -186,34 +188,38 @@
             </div>
             <div class="swiper-slide flex flex-col items-center">
               <div class="screen-frame">
-                <div class="loader"></div>
-                <video
-                  class="custom-video"
-                  loop
-                  muted
-                  preload="metadata"
-                  poster="video-thumbnail.png"
-                >
-                  <source src="example-video2.mp4" type="video/mp4" />
-                  Your browser does not support the video tag.
-                </video>
+                <div class="video-container">
+                  <div class="loader"></div>
+                  <video
+                    class="custom-video"
+                    loop
+                    muted
+                    preload="metadata"
+                    poster="video-thumbnail.png"
+                  >
+                    <source src="example-video2.mp4" type="video/mp4" />
+                    Your browser does not support the video tag.
+                  </video>
+                </div>
                 <div class="video-title">Project Title 2</div>
                 <div class="video-description">Description for Project 2</div>
               </div>
             </div>
             <div class="swiper-slide flex flex-col items-center">
               <div class="screen-frame">
-                <div class="loader"></div>
-                <video
-                  class="custom-video"
-                  loop
-                  muted
-                  preload="metadata"
-                  poster="video-thumbnail.png"
-                >
-                  <source src="example-video3.mp4" type="video/mp4" />
-                  Your browser does not support the video tag.
-                </video>
+                <div class="video-container">
+                  <div class="loader"></div>
+                  <video
+                    class="custom-video"
+                    loop
+                    muted
+                    preload="metadata"
+                    poster="video-thumbnail.png"
+                  >
+                    <source src="example-video3.mp4" type="video/mp4" />
+                    Your browser does not support the video tag.
+                  </video>
+                </div>
                 <div class="video-title">Project Title 3</div>
                 <div class="video-description">Description for Project 3</div>
               </div>

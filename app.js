@@ -148,52 +148,41 @@ function initSwiper() {
   });
   console.log("Swiper initialized.");
 }
+
 function initVideoControls() {
   console.log("Initializing video controls...");
   const videos = document.querySelectorAll(".custom-video");
   console.log("Found videos:", videos);
 
-  const isIOS = /iPad|iPhone|iPod/.test(navigator.userAgent);
+  const isComputer = /Windows|Macintosh|Linux/.test(navigator.userAgent);
 
   videos.forEach((video) => {
     const loader = video.parentElement.querySelector(".loader");
 
-    // Autoplay handling for iOS devices
-    if (isIOS) {
+    if (isComputer) {
+      video.load();
+      video.removeAttribute("autoplay");
+    } else {
       video.autoplay = true;
       video.muted = true;
-    } else {
-      video.removeAttribute("autoplay");
     }
 
     // Show loader and hide video initially
     video.style.display = "none";
     loader.style.display = "block";
 
-    // Handle video loaded metadata event
-    video.addEventListener("loadedmetadata", () => {
-      if (video.readyState > 2) {
-        // readyState 3 means the video is ready to play
-        if (loader) {
-          loader.style.display = "none";
-        }
-        video.style.display = "block";
-        if (!isIOS) {
-          video.play().catch(() => {});
-        }
-      }
-    });
-
-    // Handle video can play event
-    video.addEventListener("canplay", () => {
+    // Combined event listener for video readiness
+    const handleVideoReady = () => {
       if (loader) {
         loader.style.display = "none";
       }
       video.style.display = "block";
-      if (!isIOS) {
+      if (isComputer) {
         video.play().catch(() => {});
       }
-    });
+    };
+
+    video.addEventListener("canplaythrough", handleVideoReady);
 
     // Fallback to hide loader after a certain time
     setTimeout(() => {
