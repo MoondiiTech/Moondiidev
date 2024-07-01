@@ -57,6 +57,7 @@ body {
   border-radius: 8px; /* Adds rounded corners */
   background: transparent; /* No background on the button text */
   overflow: hidden; /* Ensures no overflow from the pseudo-element */
+  display: inline-block;
 }
 
 .menu-button::before {

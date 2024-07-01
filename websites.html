@@ -56,53 +56,6 @@
       class="container"
     >
       <style>
-        #home-button {
-          display: inline-block; /* Ensure the button behaves as a block element */
-          position: relative;
-          border: none;
-          color: #fafafa;
-          padding: 8px 20px;
-          font-size: 4.25rem; /* Adjusting the font size */
-          font-weight: bold;
-          font-family: "MenuFont", sans-serif !important; /* Use the custom font */
-          text-align: left;
-          transition: transform 0.3s ease, color 0.3s ease;
-          transform: perspective(500px) rotateY(40deg);
-          margin-bottom: 10px; /* Negative margin to pack buttons closely */
-          border-radius: 8px; /* Adds rounded corners */
-          background: transparent; /* No background on the button text */
-          overflow: hidden; /* Ensures no overflow from the pseudo-element */
-        }
-
-        #home-button::before {
-          content: "";
-          position: absolute;
-          top: 0;
-          left: 0;
-          right: 0;
-          bottom: 0;
-          clip-path: polygon(2% 15%, 100% 61%, 100% 63%, 7% 84%);
-          transition: background-color 0.3s ease;
-          z-index: -1;
-        }
-
-        #home-button:hover::before,
-        #home-button:focus::before {
-          background: rgba(
-            237,
-            237,
-            237,
-            0.9
-          ); /* Lighter background on hover */
-        }
-
-        #home-button:hover,
-        #home-button:focus {
-          color: #0e5f44; /* Changed to a darker shade of green */
-          transform: perspective(500px) rotateY(0deg);
-          outline: none;
-        }
-
         /* Custom Swiper Navigation Buttons */
         .swiper-button-next,
         .swiper-button-prev {
@@ -194,9 +147,9 @@
           }
         }
       </style>
-      <button id="home-button">
-        <a href="index.html" data-transition-type="type2">HOME</a>
-      </button>
+      <a href="index.html" class="menu-button" data-transition-type="type2"
+        >HOME</a
+      >
       <div
         class="w-full h-full bg-dark flex flex-col items-center justify-center relative"
       >
