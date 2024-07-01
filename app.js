@@ -157,6 +157,7 @@ function initVideoControls() {
 
   videos.forEach((video) => {
     const loader = video.parentElement.querySelector(".loader");
+    video.load();
 
     // Autoplay handling for iOS devices
     if (isIOS) {
@@ -170,29 +171,16 @@ function initVideoControls() {
     video.style.display = "none";
     loader.style.display = "block";
 
-    // Handle video loaded metadata event
-    video.addEventListener("loadedmetadata", () => {
-      if (video.readyState > 2) {
-        // readyState 3 means the video is ready to play
-        if (loader) {
-          loader.style.display = "none";
-        }
-        video.style.display = "block";
-        if (!isIOS) {
-          video.play().catch(() => {});
-        }
-      }
-    });
-
     // Handle video can play event
     video.addEventListener("canplay", () => {
       if (loader) {
         loader.style.display = "none";
       }
       video.style.display = "block";
-      if (!isIOS) {
-        video.play().catch(() => {});
-      }
+      // if (!isIOS) {
+      //   video.play();
+      // }
+      video.play();
     });
 
     // Fallback to hide loader after a certain time
