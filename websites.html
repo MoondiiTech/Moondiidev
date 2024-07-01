@@ -137,6 +137,28 @@
           font-size: 20px;
         }
 
+        @media (max-width: 767px) {
+          .swiper-buttons {
+            /* Center the navigation buttons */
+            display: flex;
+            justify-content: center;
+            gap: 5rem;
+            margin-top: 1rem;
+            margin-bottom: 2rem;
+            z-index: 100; /* Ensure buttons are above the content */
+          }
+          .swiper-button-next,
+          .swiper-button-prev {
+            position: relative;
+            right: 0;
+            left: 0;
+          }
+        }
+        @media (min-width: 768px) {
+          .swiper-slide {
+            margin-right: 2rem !important; /* Add spacing between slides on medium and larger screens */
+          }
+        }
         /* *********************** */
 
         .swiper-slide {
@@ -231,11 +253,13 @@
             </div>
             <!-- Add more slides as needed -->
           </div>
+          <!-- Add Navigation -->
+          <div class="swiper-buttons">
+            <div class="swiper-button-prev"></div>
+            <div class="swiper-button-next"></div>
+          </div>
           <!-- Add Pagination -->
           <div class="swiper-pagination relative"></div>
-          <!-- Add Navigation -->
-          <div class="swiper-button-next"></div>
-          <div class="swiper-button-prev"></div>
         </div>
       </div>
     </main>
