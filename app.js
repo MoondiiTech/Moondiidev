@@ -171,7 +171,7 @@ function initVideoControls() {
     }
 
     // Handle video can play event
-    video.addEventListener("canplay", () => {
+    video.addEventListener("loadedmetadata", () => {
       console.log("Video can play event triggered");
 
       if (loader) {
