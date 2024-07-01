@@ -252,6 +252,13 @@ function initVideoControls() {
       video.muted = false; // Unmute the video
       video.play();
     });
+
+    // Event listener for exiting fullscreen
+    document.addEventListener("fullscreenchange", () => {
+      if (!document.fullscreenElement) {
+        video.muted = true; // Mute the video
+      }
+    });
   });
 
   console.log("Video controls initialized.");
