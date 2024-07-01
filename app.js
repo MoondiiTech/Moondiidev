@@ -162,13 +162,7 @@ function initVideoControls() {
     video.load();
     video.muted = true;
 
-    // Autoplay handling for computers
-    if (isComputer) {
-      video.removeAttribute("autoplay");
-      video.play().catch(() => {});
-    } else {
-      video.autoplay = false;
-    }
+    video.autoplay = false;
 
     // Show loader and hide video initially
     video.style.display = "none";
