@@ -1,6 +1,46 @@
 // Global variable to store the current transition type
 let currentTransitionType = "type1";
 
+// Initialize first swiper with default options
+const swiper1Options = {
+  slidesPerView: 1,
+  spaceBetween: 20,
+  loop: true,
+  initialSlide: 1,
+  pagination: {
+    el: ".swiper-pagination-1",
+    clickable: true,
+  },
+  navigation: {
+    nextEl: ".swiper-button-next-1",
+    prevEl: ".swiper-button-prev-1",
+  },
+};
+
+// Initialize second swiper with different options
+const swiper2Options = {
+  slidesPerView: 1, // Default slides per view for mobile
+  spaceBetween: 20,
+  loop: true,
+  initialSlide: 1,
+  pagination: {
+    el: ".swiper-pagination-2",
+    clickable: true,
+  },
+  navigation: {
+    nextEl: ".swiper-button-next-2",
+    prevEl: ".swiper-button-prev-2",
+  },
+  breakpoints: {
+    // Breakpoints for responsive design
+
+    768: {
+      // When window width is >= 768px (desktop)
+      slidesPerView: 4,
+    },
+  },
+};
+
 function showOverlay() {
   console.log("Showing overlay");
   document.getElementById("overlay").style.display = "block";
@@ -123,6 +163,15 @@ function contentAnimationForWebsites() {
   });
 }
 
+function contentAnimationForGames() {
+  console.log("Animating games content");
+  gsap.from("main", {
+    duration: 1,
+    opacity: 0,
+    ease: "power2.inOut",
+  });
+}
+
 function setEqualHeightForSlides() {
   const slides = document.querySelectorAll(".swiper-slide");
   let maxHeight = 0;
@@ -144,29 +193,16 @@ function setEqualHeightForSlides() {
 // Call the function after the Swiper initialization
 function initializePage() {
   console.log("Initializing page...");
-  initSwiper();
+  initSwiper(".swiper-container-1", swiper1Options);
+  initSwiper(".swiper-container-2", swiper2Options);
   initVideoControls();
   setEqualHeightForSlides(); // Set equal height for slides
   console.log("Page initialized.");
 }
 
-function initSwiper() {
+function initSwiper(containerSelector, options) {
   console.log("Initializing Swiper...");
-  const swiper = new Swiper(".swiper-container", {
-    slidesPerView: 1,
-    spaceBetween: 20,
-    loop: true,
-    initialSlide: 1, // Start from the second slide (index 1)
-    pagination: {
-      el: ".swiper-pagination",
-      clickable: true,
-    },
-    navigation: {
-      nextEl: ".swiper-button-next",
-      prevEl: ".swiper-button-prev",
-    },
-  });
-
+  const swiper = new Swiper(containerSelector, options);
   const cooldown = 100; // Cooldown period in milliseconds
   let isCooldown = false; // Flag to manage cooldown state
 
@@ -291,6 +327,9 @@ barba.init({
             break;
           case "websites":
             contentAnimationForWebsites();
+            break;
+          case "games":
+            contentAnimationForGames();
             break;
           default:
             contentAnimation();

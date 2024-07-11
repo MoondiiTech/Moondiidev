@@ -1,0 +1,335 @@
+<!DOCTYPE html>
+<html lang="en" data-barba="wrapper">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link id="main-stylesheet" rel="stylesheet" href="styles.css" />
+    <link
+      rel="stylesheet"
+      href="https://unpkg.com/swiper/swiper-bundle.min.css"
+    />
+    <title>Moondiidev</title>
+  </head>
+  <body class="font-sans antialiased text-white bg-dark">
+    <div
+      id="overlay"
+      style="
+        display: none;
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        z-index: 9999;
+        background: rgba(0, 0, 0, 0);
+      "
+    ></div>
+
+    <!-- Transition 1 -->
+    <ul
+      class="transition--1 flex absolute inset-0 m-0 z-50 pointer-events-none h-screen w-full"
+    >
+      <li class="transform scale-y-0 custom-green-100 w-1/4 md:w-1/6"></li>
+      <li class="transform scale-y-0 custom-green-200 w-1/4 md:w-1/6"></li>
+      <li class="transform scale-y-0 custom-green-300 w-1/4 md:w-1/6"></li>
+      <li class="transform scale-y-0 custom-green-400 w-1/4 md:w-1/6"></li>
+      <li
+        class="transform scale-y-0 custom-green-500 hidden md:block w-1/6"
+      ></li>
+      <li
+        class="transform scale-y-0 custom-green-600 hidden md:block w-1/6"
+      ></li>
+    </ul>
+
+    <!-- Transition 2 -->
+    <ul
+      class="transition--2 flex absolute inset-0 m-0 z-50 pointer-events-none h-screen w-full"
+    >
+      <li class="transform scale-x-0 custom-green-100 w-full"></li>
+    </ul>
+
+    <!-- Main -->
+    <main data-barba="container" data-barba-namespace="games" class="container">
+      <style>
+        /* Custom Swiper Navigation Buttons */
+        .swiper-button-next,
+        .swiper-button-prev {
+          background: linear-gradient(45deg, #0f2831, #1e4351);
+          border-radius: 50%;
+          width: 50px;
+          height: 50px;
+          color: white;
+          box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+          transition: background 0.3s ease, transform 0.3s ease;
+          z-index: 10; /* Ensure buttons are above the content */
+          position: absolute; /* Position them absolutely */
+          top: 50%; /* Center vertically */
+          transform: translateY(-50%);
+          -webkit-user-select: none; /* Safari */
+          -moz-user-select: none; /* Firefox */
+          -ms-user-select: none; /* IE10+/Edge */
+          user-select: none; /* Standard */
+        }
+
+        .swiper-button-next {
+          right: 25px;
+        }
+
+        .swiper-button-prev {
+          left: 25px;
+        }
+
+        .swiper-button-next:hover,
+        .swiper-button-prev:hover {
+          background: linear-gradient(45deg, #1e4351, #0f2831);
+          transform: translateY(-50%) scale(1.05); /* Scale up on hover */
+        }
+
+        .swiper-button-next::after,
+        .swiper-button-prev::after {
+          font-size: 20px;
+        }
+
+        .swiper-buttons {
+          display: flex;
+          justify-content: space-between;
+          align-items: center;
+          width: 100%;
+        }
+
+        @media (max-width: 767px) {
+          .swiper-buttons {
+            /* Center the navigation buttons */
+            display: flex;
+            justify-content: center;
+            gap: 5rem;
+            margin-top: 4rem;
+            margin-bottom: 2rem;
+            z-index: 100; /* Ensure buttons are above the content */
+          }
+          .swiper-button-next,
+          .swiper-button-prev {
+            position: relative;
+            right: 0;
+            left: 0;
+          }
+        }
+
+        /**********************************/
+        .swiper-container {
+          width: 100%;
+          height: 100%;
+          background-color: #0e0e0f;
+          border: 2px solid #151516;
+          border-radius: 6%;
+          padding: 4rem;
+          overflow: hidden;
+        }
+        .laptop-frame {
+          position: relative;
+          width: 30rem;
+          height: 24rem;
+          border-radius: 12px;
+          background-color: #000;
+          box-shadow: 0 10px 20px rgba(0, 0, 0, 0.5);
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          margin: 1rem 0;
+          box-sizing: border-box;
+        }
+
+        .phone-frame {
+          position: relative;
+          width: 11.5rem;
+          height: 24rem;
+          border-radius: 8px;
+          background-color: #000;
+          box-shadow: 0 10px 20px rgba(0, 0, 0, 0.5);
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          margin: 1rem 0;
+        }
+
+        .video-container {
+          width: 100%;
+          height: 100%;
+          background-color: #000;
+          border-radius: 20px;
+          overflow: hidden;
+        }
+
+        .custom-video {
+          width: 100%;
+          height: 100%;
+          border-radius: 20px;
+        }
+
+        .swiper-slide {
+          display: flex;
+          flex-direction: column;
+          align-items: center;
+          cursor: pointer;
+        }
+
+        .project-details {
+          display: none;
+          flex-direction: column;
+          align-items: center;
+          margin-top: 1rem;
+        }
+
+        .video-title {
+          font-size: 1.5rem;
+          font-weight: bold;
+          text-align: center;
+          margin-bottom: 0.5rem;
+        }
+
+        .video-description {
+          font-size: 1rem;
+          text-align: center;
+          max-width: 300px;
+        }
+
+        .swiper-slide-active .project-details {
+          display: flex;
+        }
+
+        @media (min-width: 768px) {
+          .swiper-slide {
+            flex-direction: row;
+            justify-content: space-around;
+            margin-right: 2rem !important;
+          }
+
+          .swiper-slide .project-details {
+            margin-bottom: 0;
+          }
+        }
+      </style>
+
+      <a href="index.html" class="menu-button" data-transition-type="type2"
+        >HOME</a
+      >
+      <div>
+        <div
+          class="w-full h-full bg-dark flex flex-col items-center justify-center relative"
+        >
+          <h2 class="text-5xl mb-12 font-bold custom-text-green-100">
+            Mobile Games
+          </h2>
+          <div
+            class="swiper-container swiper-container-2 w-full max-w-4xl mb-6"
+          >
+            <div class="swiper-wrapper">
+              <!-- Slides -->
+              <div class="swiper-slide flex flex-col items-center">
+                <div class="phone-frame">
+                  <div class="video-container">
+                    <div class="loader"></div>
+                    <video
+                      class="custom-video"
+                      loop
+                      muted
+                      preload="metadata"
+                      poster="video-thumbnail.png"
+                    >
+                      <source src="example-video1.mp4" type="video/mp4" />
+                      Your browser does not support the video tag.
+                    </video>
+                  </div>
+                </div>
+              </div>
+              <div class="swiper-slide flex flex-col items-center">
+                <div class="phone-frame">
+                  <div class="video-container">
+                    <div class="loader"></div>
+                    <video
+                      class="custom-video"
+                      loop
+                      muted
+                      preload="metadata"
+                      poster="video-thumbnail.png"
+                    >
+                      <source src="example-video2.mp4" type="video/mp4" />
+                      Your browser does not support the video tag.
+                    </video>
+                  </div>
+                </div>
+              </div>
+              <div class="swiper-slide flex flex-col items-center">
+                <div class="phone-frame">
+                  <div class="video-container">
+                    <div class="loader"></div>
+                    <video
+                      class="custom-video"
+                      loop
+                      muted
+                      preload="metadata"
+                      poster="video-thumbnail.png"
+                    >
+                      <source src="example-video3.mp4" type="video/mp4" />
+                      Your browser does not support the video tag.
+                    </video>
+                  </div>
+                </div>
+              </div>
+              <div class="swiper-slide flex flex-col items-center">
+                <div class="phone-frame">
+                  <div class="video-container">
+                    <div class="loader"></div>
+                    <video
+                      class="custom-video"
+                      loop
+                      muted
+                      preload="metadata"
+                      poster="video-thumbnail.png"
+                    >
+                      <source src="example-video3.mp4" type="video/mp4" />
+                      Your browser does not support the video tag.
+                    </video>
+                  </div>
+                </div>
+              </div>
+              <div class="swiper-slide flex flex-col items-center">
+                <div class="phone-frame">
+                  <div class="video-container">
+                    <div class="loader"></div>
+                    <video
+                      class="custom-video"
+                      loop
+                      muted
+                      preload="metadata"
+                      poster="video-thumbnail.png"
+                    >
+                      <source src="example-video3.mp4" type="video/mp4" />
+                      Your browser does not support the video tag.
+                    </video>
+                  </div>
+                </div>
+              </div>
+              <!-- Add more slides as needed -->
+            </div>
+          </div>
+          <!-- Add Navigation -->
+          <div class="swiper-buttons">
+            <div class="swiper-button-prev swiper-button-prev-2"></div>
+            <div class="swiper-button-next swiper-button-next-2"></div>
+          </div>
+        </div>
+      </div>
+    </main>
+
+    <!-- Barba.js -->
+    <script src="https://unpkg.com/@barba/core"></script>
+    <!-- Swiper.js -->
+    <script src="https://unpkg.com/swiper/swiper-bundle.min.js"></script>
+    <!-- GSAP for animations -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.9.1/gsap.min.js"></script>
+    <!-- App.js for custom animations and transitions -->
+    <script src="app.js"></script>
+  </body>
+</html>

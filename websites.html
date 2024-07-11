@@ -120,6 +120,8 @@
           }
         }
 
+        /**********************************/
+
         .swiper-slide {
           display: flex;
           flex-direction: column;
@@ -150,6 +152,19 @@
             margin-right: 2rem !important; /* Add spacing between slides on medium and larger screens */
           }
         }
+
+        .laptop-frame {
+          position: relative;
+          width: 30rem !important;
+          height: 24rem;
+          border-radius: 12px;
+          background-color: #000;
+          box-shadow: 0 10px 20px rgba(0, 0, 0, 0.5);
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          margin: 1rem 0;
+        }
       </style>
       <a href="index.html" class="menu-button" data-transition-type="type2"
         >HOME</a
@@ -160,7 +175,7 @@
         <h2 class="text-5xl mb-12 font-bold custom-text-green-100">
           Web Projects
         </h2>
-        <div class="swiper-container w-full max-w-4xl mb-6">
+        <div class="swiper-container swiper-container-1 w-full max-w-4xl mb-6">
           <div class="swiper-wrapper">
             <!-- Slides -->
             <div class="swiper-slide flex flex-col items-center">
@@ -237,11 +252,11 @@
         </div>
         <!-- Add Navigation -->
         <div class="swiper-buttons">
-          <div class="swiper-button-prev"></div>
-          <div class="swiper-button-next"></div>
+          <div class="swiper-button-prev swiper-button-prev-1"></div>
+          <div class="swiper-button-next swiper-button-next-1"></div>
         </div>
         <!-- Add Pagination -->
-        <div class="swiper-pagination relative"></div>
+        <div class="swiper-pagination swiper-pagination-1 relative"></div>
       </div>
     </main>
 
