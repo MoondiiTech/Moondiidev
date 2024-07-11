@@ -70,6 +70,10 @@
           position: absolute; /* Position them absolutely */
           top: 50%; /* Center vertically */
           transform: translateY(-50%);
+          -webkit-user-select: none; /* Safari */
+          -moz-user-select: none; /* Firefox */
+          -ms-user-select: none; /* IE10+/Edge */
+          user-select: none; /* Standard */
         }
 
         .swiper-button-next {
@@ -153,8 +157,8 @@
       <div
         class="w-full h-full bg-dark flex flex-col items-center justify-center relative"
       >
-        <h2 class="text-5xl mb-12 font-bold custom-text-gold-100">
-          🕸️Web Projects
+        <h2 class="text-5xl mb-12 font-bold custom-text-green-100">
+          Web Projects
         </h2>
         <div class="swiper-container w-full max-w-4xl mb-6">
           <div class="swiper-wrapper">
