@@ -33,10 +33,13 @@ const swiper2Options = {
   },
   breakpoints: {
     // Breakpoints for responsive design
-
-    768: {
-      // When window width is >= 768px (desktop)
+    // Show 4 for desktop
+    1024: {
       slidesPerView: 4,
+    },
+    // Show 3 for tablet
+    768: {
+      slidesPerView: 2,
     },
   },
 };
@@ -203,6 +206,9 @@ function initializePage() {
 function initSwiper(containerSelector, options) {
   console.log("Initializing Swiper...");
   const swiper = new Swiper(containerSelector, options);
+  // Access slidesPerView from Swiper instance after initialization
+  const slidesPerView = swiper.params.slidesPerView;
+
   const cooldown = 100; // Cooldown period in milliseconds
   let isCooldown = false; // Flag to manage cooldown state
 
@@ -210,10 +216,11 @@ function initSwiper(containerSelector, options) {
     if (!isCooldown) {
       isCooldown = true;
       button.classList.add("disabled"); // Optionally, add a CSS class to visually disable the button
-      action();
+      // Execute action after cooldown
       setTimeout(() => {
-        isCooldown = false;
+        action();
         button.classList.remove("disabled"); // Remove the CSS class to enable the button
+        isCooldown = false;
       }, cooldown);
     }
   };
@@ -221,16 +228,27 @@ function initSwiper(containerSelector, options) {
   const nextButton = document.querySelector(".swiper-button-next");
   const prevButton = document.querySelector(".swiper-button-prev");
 
-  nextButton.addEventListener("click", () =>
-    handleButtonClick(nextButton, () => swiper.slideNext())
-  );
-  prevButton.addEventListener("click", () =>
-    handleButtonClick(prevButton, () => swiper.slidePrev())
-  );
+  nextButton.addEventListener("click", () => {
+    handleButtonClick(nextButton, () => {
+      const slidesToMove = 4; // Number of slides to move
+      for (let i = 0; i < slidesToMove; i++) {
+        swiper.slideNext(); // Move swiper forward one slide
+      }
+    });
+  });
+
+  prevButton.addEventListener("click", () => {
+    handleButtonClick(prevButton, () => {
+      // Calculate number of slides to move
+      const slidesToMove = slidesPerView;
+      for (let i = 0; i < slidesToMove; i++) {
+        swiper.slidePrev();
+      }
+    });
+  });
 
   console.log("Swiper initialized.");
 }
-
 function initVideoControls() {
   console.log("Initializing video controls...");
   const videos = document.querySelectorAll(".custom-video");

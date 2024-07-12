@@ -65,7 +65,7 @@
           z-index: 10; /* Ensure buttons are above the content */
           position: absolute; /* Position them absolutely */
           top: 50%; /* Center vertically */
-          transform: translateY(-50%);
+          transform: translateY(50%);
           -webkit-user-select: none; /* Safari */
           -moz-user-select: none; /* Firefox */
           -ms-user-select: none; /* IE10+/Edge */
@@ -73,17 +73,17 @@
         }
 
         .swiper-button-next {
-          right: 25px;
+          right: 10px; /* Adjust to bring closer to the swiper container */
         }
 
         .swiper-button-prev {
-          left: 25px;
+          left: 10px; /* Adjust to bring closer to the swiper container */
         }
 
         .swiper-button-next:hover,
         .swiper-button-prev:hover {
           background: linear-gradient(45deg, #1e4351, #0f2831);
-          transform: translateY(-50%) scale(1.05); /* Scale up on hover */
+          transform: translateY(50%) scale(1.05); /* Scale up on hover */
         }
 
         .swiper-button-next::after,
@@ -103,8 +103,8 @@
             /* Center the navigation buttons */
             display: flex;
             justify-content: center;
-            gap: 5rem;
-            margin-top: 4rem;
+            gap: 2rem; /* Adjusted gap */
+            margin-top: 2rem;
             margin-bottom: 2rem;
             z-index: 100; /* Ensure buttons are above the content */
           }
@@ -123,7 +123,7 @@
           background-color: #0e0e0f;
           border: 2px solid #151516;
           border-radius: 6%;
-          padding: 4rem;
+          padding: 2rem; /* Adjust padding */
           overflow: hidden;
         }
 
@@ -213,7 +213,7 @@
       >
       <div>
         <div
-          class="w-full h-full bg-dark flex flex-col items-center justify-center relative"
+          class="w-4/6 h-full bg-dark flex flex-col items-center justify-center relative m-auto"
         >
           <h2 class="text-5xl mb-12 font-bold custom-text-green-100">
             Mobile Games
