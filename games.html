@@ -89,19 +89,7 @@
 
         @media (max-width: 767px) {
           .swiper-buttons {
-            /* Center the navigation buttons */
-            display: flex;
-            justify-content: center;
-            gap: 2rem; /* Adjusted gap */
-            margin-top: 2rem;
-            margin-bottom: 2rem;
-            z-index: 100; /* Ensure buttons are above the content */
-          }
-          .swiper-button-next,
-          .swiper-button-prev {
-            position: relative;
-            right: 0;
-            left: 0;
+            display: none;
           }
         }
 
@@ -116,14 +104,18 @@
           overflow: hidden;
         }
 
-        .phone-frame:hover {
-          transform: translateY(-10px) scale(1.01);
-          box-shadow: 0 15px 30px rgba(0, 0, 0, 0.7);
+        /* Works only on desktop */
+        @media (min-width: 768px) {
+          .phone-frame:hover {
+            transform: translateY(-10px) scale(1.01);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.7);
+          }
+          .phone-frame:hover::after {
+            transform: translateY(10px) scale(0.99);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.5);
+          }
         }
-        .phone-frame:hover::after {
-          transform: translateY(10px) scale(0.99);
-          box-shadow: 0 10px 20px rgba(0, 0, 0, 0.5);
-        }
+
         .phone-frame {
           position: relative;
           width: 11.5rem;
