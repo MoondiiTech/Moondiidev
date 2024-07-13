@@ -45,6 +45,7 @@ const swiper2Options = {
 };
 
 function showDetails(title, description) {
+  document.getElementById("project-title").textContent = title;
   document.getElementById("project-details").textContent = description;
   document.getElementById("project-details-overlay").style.display = "flex";
 }
