@@ -44,14 +44,34 @@ const swiper2Options = {
   },
 };
 
+function showDetails(title, description) {
+  document.getElementById("project-details").textContent = description;
+  document.getElementById("project-details-overlay").style.display = "flex";
+}
+
+// Check if close-button exists before adding event listener
+var closeButton = document.getElementById("close-button");
+if (closeButton) {
+  closeButton.addEventListener("click", function () {
+    var overlay = document.getElementById("project-details-overlay");
+    if (overlay) {
+      overlay.style.display = "none";
+    } else {
+      console.error("Overlay element not found!");
+    }
+  });
+}
+
 function showOverlay() {
   console.log("Showing overlay");
   document.getElementById("overlay").style.display = "block";
 }
 
 function hideOverlay() {
-  console.log("Hiding overlay");
-  document.getElementById("overlay").style.display = "none";
+  var overlay = document.getElementById("overlay");
+  if (overlay) {
+    overlay.style.display = "none";
+  }
 }
 
 // Define transition functions for each type
@@ -228,24 +248,28 @@ function initSwiper(containerSelector, options) {
   const nextButton = document.querySelector(".swiper-button-next");
   const prevButton = document.querySelector(".swiper-button-prev");
 
-  nextButton.addEventListener("click", () => {
-    handleButtonClick(nextButton, () => {
-      const slidesToMove = 4; // Number of slides to move
-      for (let i = 0; i < slidesToMove; i++) {
-        swiper.slideNext(); // Move swiper forward one slide
-      }
+  if (nextButton) {
+    nextButton.addEventListener("click", () => {
+      handleButtonClick(nextButton, () => {
+        const slidesToMove = 4; // Number of slides to move
+        for (let i = 0; i < slidesToMove; i++) {
+          swiper.slideNext(); // Move swiper forward one slide
+        }
+      });
     });
-  });
+  }
 
-  prevButton.addEventListener("click", () => {
-    handleButtonClick(prevButton, () => {
-      // Calculate number of slides to move
-      const slidesToMove = slidesPerView;
-      for (let i = 0; i < slidesToMove; i++) {
-        swiper.slidePrev();
-      }
+  if (prevButton) {
+    prevButton.addEventListener("click", () => {
+      handleButtonClick(prevButton, () => {
+        // Calculate number of slides to move
+        const slidesToMove = slidesPerView;
+        for (let i = 0; i < slidesToMove; i++) {
+          swiper.slidePrev();
+        }
+      });
     });
-  });
+  }
 
   console.log("Swiper initialized.");
 }
@@ -333,6 +357,9 @@ barba.init({
       leave(data) {
         const done = this.async();
         currentTransitionType = data.trigger.dataset.transitionType || "type1";
+        document.getElementById("project-details-overlay").style.display =
+          "none";
+
         console.log("Leave transition type:", currentTransitionType);
         let timeline = transitions[currentTransitionType]();
         timeline.eventCallback("onComplete", done);
