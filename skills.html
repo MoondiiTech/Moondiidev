@@ -8,41 +8,31 @@
     <title>Moondiidev</title>
   </head>
   <body class="font-sans antialiased text-white bg-dark">
-    <div
-      id="overlay"
-      style="
-        display: none;
-        position: fixed;
-        top: 0;
-        left: 0;
-        width: 100%;
-        height: 100%;
-        z-index: 9999;
-        background: rgba(0, 0, 0, 0);
-      "
-    ></div>
+    <!-- Common code -->
+    <script>
+      // Function to insert HTML content at the beginning of the body
+      function insertTemplateAtBeginning(content) {
+        document.body.insertAdjacentHTML("afterbegin", content);
+        // After insertion, initialize scripts that depend on this content
+        initializeScripts();
+      }
 
-    <!-- Transition 1 -->
-    <ul
-      class="transition--1 flex absolute inset-0 m-0 z-50 pointer-events-none h-screen w-full"
-    >
-      <li class="transform scale-y-0 custom-green-100 w-1/4 md:w-1/6"></li>
-      <li class="transform scale-y-0 custom-green-200 w-1/4 md:w-1/6"></li>
-      <li class="transform scale-y-0 custom-green-300 w-1/4 md:w-1/6"></li>
-      <li class="transform scale-y-0 custom-green-400 w-1/4 md:w-1/6"></li>
-      <li
-        class="transform scale-y-0 custom-green-500 hidden md:block w-1/6"
-      ></li>
-      <li
-        class="transform scale-y-0 custom-green-600 hidden md:block w-1/6"
-      ></li>
-    </ul>
-    <!-- Transition 2 -->
-    <ul
-      class="transition--2 flex absolute inset-0 m-0 z-50 pointer-events-none h-screen w-full"
-    >
-      <li class="transform scale-x-0 custom-green-100 w-full"></li>
-    </ul>
+      // Function to initialize scripts after content insertion
+      function initializeScripts() {
+        // Initialize your scripts here, like Swiper.js or Barba.js
+        initSwiper();
+        initBarba();
+        // Any other initialization scripts
+      }
+
+      // Fetch the project details overlay template
+      fetch("common.html")
+        .then((response) => response.text())
+        .then((data) => {
+          insertTemplateAtBeginning(data); // Insert fetched template at the beginning
+        })
+        .catch((error) => console.error("Error fetching template:", error));
+    </script>
 
     <!-- Main -->
     <main
