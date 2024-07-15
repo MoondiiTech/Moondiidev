@@ -20,7 +20,7 @@ const swiper1Options = {
 // Initialize second swiper with different options
 const swiper2Options = {
   slidesPerView: 1, // Default slides per view for mobile
-  spaceBetween: 20,
+  spaceBetween: 60,
   loop: true,
   initialSlide: 1,
   pagination: {

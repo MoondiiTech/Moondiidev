@@ -89,10 +89,19 @@
 
         @media (max-width: 767px) {
           .swiper-buttons {
-            display: none;
+            /* Center the navigation buttons */
+            display: flex;
+            justify-content: center;
+            gap: 5rem;
+            margin-bottom: 2rem;
+          }
+          .swiper-button-next,
+          .swiper-button-prev {
+            position: relative;
+            right: 0;
+            left: 0;
           }
         }
-
         /**********************************/
         .swiper-container {
           width: 100%;
@@ -302,6 +311,8 @@
             <div class="swiper-button-prev swiper-button-prev-2"></div>
             <div class="swiper-button-next swiper-button-next-2"></div>
           </div>
+          <!-- Add Pagination -->
+          <div class="swiper-pagination swiper-pagination-2 relative"></div>
         </div>
       </div>
     </main>
