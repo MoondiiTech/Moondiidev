@@ -248,10 +248,7 @@ function initSwiper(containerSelector, options) {
   if (nextButton) {
     nextButton.addEventListener("click", () => {
       handleButtonClick(nextButton, () => {
-        const slidesToMove = 4; // Number of slides to move
-        for (let i = 0; i < slidesToMove; i++) {
-          swiper.slideNext(); // Move swiper forward one slide
-        }
+        swiper.slideNext(); // Move swiper forward one slide
       });
     });
   }
@@ -261,9 +258,7 @@ function initSwiper(containerSelector, options) {
       handleButtonClick(prevButton, () => {
         // Calculate number of slides to move
         const slidesToMove = slidesPerView;
-        for (let i = 0; i < slidesToMove; i++) {
-          swiper.slidePrev();
-        }
+        swiper.slidePrev();
       });
     });
   }
