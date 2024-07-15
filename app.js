@@ -318,6 +318,7 @@ function initVideoControls() {
         video.msRequestFullscreen(); // IE/Edge
       }
       video.muted = false; // Unmute the video
+      video.playsInline = false;
       video.play();
     });
 
@@ -325,7 +326,6 @@ function initVideoControls() {
     document.addEventListener("fullscreenchange", () => {
       if (!document.fullscreenElement) {
         video.muted = true; // Mute the video
-        video.playsInline = false;
         video.play();
       }
     });
