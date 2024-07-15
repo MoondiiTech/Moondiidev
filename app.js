@@ -275,6 +275,14 @@ function initVideoControls() {
   videos.forEach((video) => {
     const loader = video.parentElement.querySelector(".loader");
 
+    if (isComputer) {
+      video.load();
+      video.removeAttribute("autoplay");
+    } else {
+      video.autoplay = true;
+      video.muted = true;
+    }
+
     // Show loader and hide video initially
     video.style.display = "none";
     loader.style.display = "block";
