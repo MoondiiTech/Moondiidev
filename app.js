@@ -21,7 +21,7 @@ const swiper1Options = {
 const swiper2Options = {
   slidesPerView: 1, // Default slides per view for mobile
   spaceBetween: 20,
-  loop: true,
+  loop: false, // Set to false until there are more than 3 slides. It is causing a bug.
   initialSlide: 1,
   pagination: {
     el: ".swiper-pagination-2",
