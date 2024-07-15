@@ -294,6 +294,10 @@ function initVideoControls() {
       }
       video.style.display = "block";
       if (isComputer) {
+        const playButton = video.parentElement.querySelector(".play-button");
+        if (playButton) {
+          playButton.style.display = "none";
+        }
         video.play().catch(() => {});
       }
     };
@@ -318,6 +322,10 @@ function initVideoControls() {
         video.webkitRequestFullscreen(); // Chrome, Safari and Opera
       } else if (video.msRequestFullscreen) {
         video.msRequestFullscreen(); // IE/Edge
+      }
+      const playButton = video.parentElement.querySelector(".play-button");
+      if (playButton) {
+        playButton.style.display = "none";
       }
       video.muted = false; // Unmute the video
       video.play();
