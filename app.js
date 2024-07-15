@@ -40,6 +40,7 @@ const swiper2Options = {
     },
     // Show 3 for tablet
     768: {
+      spaceBetween: 40,
       slidesPerView: 2,
     },
   },
