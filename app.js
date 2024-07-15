@@ -35,7 +35,7 @@ const swiper2Options = {
     // Breakpoints for responsive design
     // Show 4 for desktop
     1024: {
-      slidesPerView: 4,
+      slidesPerView: 3,
     },
     // Show 3 for tablet
     768: {
