@@ -50,17 +50,13 @@ function showDetails(title, description) {
   document.getElementById("project-details-overlay").style.display = "flex";
 }
 
-// Check if close-button exists before adding event listener
-var closeButton = document.getElementById("close-button");
-if (closeButton) {
-  closeButton.addEventListener("click", function () {
-    var overlay = document.getElementById("project-details-overlay");
-    if (overlay) {
-      overlay.style.display = "none";
-    } else {
-      console.error("Overlay element not found!");
-    }
-  });
+function closeDetails() {
+  var overlay = document.getElementById("project-details-overlay");
+  if (overlay) {
+    overlay.style.display = "none";
+  } else {
+    console.error("Overlay element not found!");
+  }
 }
 
 function showOverlay() {
