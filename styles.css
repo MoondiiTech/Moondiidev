@@ -172,18 +172,6 @@ body {
   transform: scale(1.01) !important; /* Slightly enlarge the video on hover */
 }
 
-.video-title {
-  font-size: 2rem;
-  margin-top: 1rem;
-  text-align: center;
-}
-
-.video-description {
-  font-size: 1.2rem;
-  margin-top: 0.5rem;
-  text-align: center;
-}
-
 .swiper-pagination-bullet {
   background: white !important; /* Make the pagination bullets white */
   opacity: 1; /* Ensure bullets are fully visible */
@@ -260,4 +248,17 @@ body {
   background-size: contain;
   pointer-events: none;
   z-index: 10;
+}
+
+.video-title {
+  font-size: 2rem;
+  font-weight: bold;
+  text-align: center;
+  margin: 2rem 0;
+}
+
+.video-description {
+  font-size: 1rem;
+  text-align: center;
+  line-height: 1.5;
 }
