@@ -224,18 +224,35 @@ function initializePage() {
 
 function initSwiper(containerSelector, options) {
   console.log("Initializing Swiper...");
-  const swiper = new Swiper(containerSelector, options);
+
+  // Ensure the container exists before initializing Swiper
+  const containerElement = document.querySelector(containerSelector);
+  if (!containerElement) {
+    console.error("Swiper container not found:", containerSelector);
+    return;
+  }
+
+  // Initialize Swiper
+  let swiper;
+  try {
+    swiper = new Swiper(containerSelector, options);
+  } catch (error) {
+    console.error("Error initializing Swiper:", error);
+    return;
+  }
+
   // Access slidesPerView from Swiper instance after initialization
   const slidesPerView = swiper.params.slidesPerView;
 
-  const cooldown = 100; // Cooldown period in milliseconds
+  // Cooldown period in milliseconds
+  const cooldown = 100;
   let isCooldown = false; // Flag to manage cooldown state
 
+  // Function to handle button click with cooldown
   const handleButtonClick = (button, action) => {
     if (!isCooldown) {
       isCooldown = true;
       button.classList.add("disabled"); // Optionally, add a CSS class to visually disable the button
-      // Execute action after cooldown
       setTimeout(() => {
         action();
         button.classList.remove("disabled"); // Remove the CSS class to enable the button
@@ -244,29 +261,68 @@ function initSwiper(containerSelector, options) {
     }
   };
 
+  // Debounce function to prevent multiple rapid clicks
+  const debounce = (func, delay) => {
+    let timeout;
+    return (...args) => {
+      clearTimeout(timeout);
+      timeout = setTimeout(() => {
+        func.apply(this, args);
+      }, delay);
+    };
+  };
+
+  // Get next and previous button elements
   const nextButton = document.querySelector(".swiper-button-next");
   const prevButton = document.querySelector(".swiper-button-prev");
 
+  if (!nextButton || !prevButton) {
+    console.error("Swiper buttons not found");
+    return;
+  }
+
+  // Remove existing event listeners to ensure only one listener is added
   if (nextButton) {
-    nextButton.addEventListener("click", () => {
+    nextButton.removeEventListener("click", nextButton._listener);
+    const nextButtonHandler = () => {
       handleButtonClick(nextButton, () => {
-        swiper.slideNext(); // Move swiper forward one slide
+        try {
+          if (swiper.slides && swiper.slides.length > 0) {
+            swiper.slideNext(); // Move swiper forward one slide
+          } else {
+            console.error("Swiper slides not found or empty");
+          }
+        } catch (error) {
+          console.error("Error moving swiper forward:", error);
+        }
       });
-    });
+    };
+    nextButton._listener = debounce(nextButtonHandler, 100);
+    nextButton.addEventListener("click", nextButton._listener);
   }
 
   if (prevButton) {
-    prevButton.addEventListener("click", () => {
+    prevButton.removeEventListener("click", prevButton._listener);
+    const prevButtonHandler = () => {
       handleButtonClick(prevButton, () => {
-        // Calculate number of slides to move
-        const slidesToMove = slidesPerView;
-        swiper.slidePrev();
+        try {
+          if (swiper.slides && swiper.slides.length > 0) {
+            swiper.slidePrev(); // Move swiper backward one slide
+          } else {
+            console.error("Swiper slides not found or empty");
+          }
+        } catch (error) {
+          console.error("Error moving swiper backward:", error);
+        }
       });
-    });
+    };
+    prevButton._listener = debounce(prevButtonHandler, 100);
+    prevButton.addEventListener("click", prevButton._listener);
   }
 
   console.log("Swiper initialized.");
 }
+
 function initVideoControls() {
   console.log("Initializing video controls...");
   const videos = document.querySelectorAll(".custom-video");
