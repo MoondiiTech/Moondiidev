@@ -20,7 +20,7 @@ const swiper1Options = {
 // Initialize second swiper with different options
 const swiper2Options = {
   slidesPerView: 1, // Default slides per view for mobile
-  spaceBetween: 0,
+  spaceBetween: 40,
   loop: true,
   initialSlide: 1,
   pagination: {
@@ -37,10 +37,10 @@ const swiper2Options = {
     1024: {
       slidesPerView: 3,
       loop: false, // Set to false until there are more than 3 slides. It is causing a bug.
+      spaceBetween: 20,
     },
     // Show 3 for tablet
     768: {
-      spaceBetween: 40,
       slidesPerView: 2,
     },
   },
