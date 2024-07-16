@@ -22,6 +22,12 @@
   font-family: "MenuFont";
   src: url("fonts/ITCAvantGardeStd-Bold.ttf") format("truetype");
 }
+
+@font-face {
+  font-family: "Anton-Regular";
+  src: url("fonts/Anton-Regular.ttf") format("truetype");
+}
+
 html,
 body {
   min-height: 100%;
@@ -40,7 +46,7 @@ body {
 /* Standard website layout container */
 .container {
   position: relative;
-  max-width: 1200px;
+  max-width: 1440px;
   margin: 0 auto;
   padding: 4rem 2rem;
 }
@@ -274,7 +280,7 @@ body {
   z-index: -1;
   background-color: #51515125;
   border-radius: 10px;
-  height: 1.15%;
+  height: 0.3rem;
   position: absolute;
   bottom: 0;
   left: -110%;
@@ -282,9 +288,23 @@ body {
   width: 100%;
   margin: 0 auto 10rem;
 }
+
 @media (orientation: portrait) or (max-width: 768px) {
   #floor {
     left: 20%;
     right: 20%;
   }
+}
+
+.background-title {
+  font-family: "Anton-Regular", sans-serif;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  font-size: 8rem;
+  line-height: 1.1;
+  color: #858585;
+  text-align: center;
+  z-index: -1;
 }
