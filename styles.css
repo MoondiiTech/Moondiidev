@@ -39,6 +39,7 @@ body {
 
 /* Standard website layout container */
 .container {
+  position: relative;
   max-width: 1200px;
   margin: 0 auto;
   padding: 4rem 2rem;
@@ -181,6 +182,10 @@ body {
   background: #0e5f44 !important; /* Change the color of the active bullet */
 }
 
+.swiper-pagination {
+  margin-top: 2rem;
+}
+
 .custom-text-green-100 {
   color: #146c63;
 }
@@ -262,4 +267,24 @@ body {
   text-align: center;
   line-height: 1.5;
   margin-bottom: 2rem;
+}
+
+#floor {
+  transform-origin: 50%;
+  z-index: -1;
+  background-color: #51515125;
+  border-radius: 10px;
+  height: 1.15%;
+  position: absolute;
+  bottom: 0;
+  left: -110%;
+  right: -110%;
+  width: 100%;
+  margin: 0 auto 10rem;
+}
+@media (orientation: portrait) or (max-width: 768px) {
+  #floor {
+    left: 20%;
+    right: 20%;
+  }
 }
