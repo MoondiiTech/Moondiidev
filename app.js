@@ -232,6 +232,11 @@ function initSwiper(containerSelector, options) {
     return;
   }
 
+  // Destroy any existing Swiper instances on this container to prevent conflicts
+  if (containerElement.swiper) {
+    containerElement.swiper.destroy(true, true);
+  }
+
   // Initialize Swiper
   let swiper;
   try {
@@ -319,6 +324,9 @@ function initSwiper(containerSelector, options) {
     prevButton._listener = debounce(prevButtonHandler, 100);
     prevButton.addEventListener("click", prevButton._listener);
   }
+
+  // Log the Swiper instance for debugging
+  console.log(swiper);
 
   console.log("Swiper initialized.");
 }
