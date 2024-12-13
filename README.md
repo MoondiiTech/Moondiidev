@@ -1,7 +1,7 @@
 <h1 align="center">Hello! I'm Munkhbilguun</h1>
 <h3 align="center">I create stuff :)</h3>
 
-- 🔭 I’m currently working on [TalentSnipe](talentsnipe.com)
+- 🔭 I’m currently working on [TalentSnipe](www.talentsnipe.com)
 
 - 📫 How to reach me **moondiidev@gmail.com**
 
